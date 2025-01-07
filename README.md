@@ -21,9 +21,9 @@ I hope you enjoy it, 'cause who knows... I might keep doing more of these fuckin
 
 ## Installation
 
-1. Make sure you have **[Psych Engine 0.7.3](https://github.com/ShadowMario/FNF-PsychEngine/releases/tag/0.7.3)** installed.
-2. Download the files from this repository.
-3. Copy the modfolder to the game's 'mods' folder.
+- Make sure you have **[Psych Engine 0.7.3](https://github.com/ShadowMario/FNF-PsychEngine/releases/tag/0.7.3)** installed.
+- Download the files from this repository.
+- Copy the modfolder to the game's 'mods' folder.
 
 ---
 
