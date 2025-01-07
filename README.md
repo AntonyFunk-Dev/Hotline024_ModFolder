@@ -6,11 +6,7 @@ It is necessary to have **[Psych Engine 0.7.3](https://github.com/ShadowMario/FN
 
 ## About the port
 
-Hey, it's me, a fun coder, and yeah, I brought **Hotline 024** to the **Psych Engine** (big shoutout to Saruky and the team for the original mod, obviously).
-
-So now that you're here, let me spill the tea — getting this port up and running? Not exactly a walk in the park, especially since I was low-key losing my motivation working on this alone (but hey, who cares about my mental health, huh?).
-
-And... was it worth it? (Maybe... just a little.)
+Hey, it's me, a fun coder, and yeah, I brought **Hotline 024** to the **Psych Engine** (big shoutout to Saruky and the team for the original mod, obviously). So now that you're here, let me spill the tea —getting this port up and running? Not exactly a walk in the park but yeah... was it worth it? (Yes.)
 
 I hope you enjoy it, 'cause who knows... I might keep doing more of these fucking things, lmao.
 
