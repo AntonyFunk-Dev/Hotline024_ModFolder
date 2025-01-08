@@ -1,6 +1,5 @@
 import tjson.TJSON as Json;
 import flixel.util.FlxGradient;
-import backend.Mods;
 
 var dir:String = 'menus/skins/';
 
@@ -99,7 +98,7 @@ function onCustomSubstateCreate(name) {
 
 function onCustomSubstateUpdate(name, elapsed) {
 	if (name == 'NikkuStyleSubstate') { 	
-		if (keyJustPressed("UI_LEFT") || keyJustPressed("UI_RIGHT")) {
+		if (keyJustPressed('UI_LEFT') || keyJustPressed('UI_RIGHT')) {
 			changeSelection((keyJustPressed('UI_LEFT') ? -1 : 1));
 			selectSkin((keyJustPressed('UI_LEFT') ? 1 : -1));
 		}

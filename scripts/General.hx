@@ -72,7 +72,6 @@ if (charConfig) game.startHScriptsNamed('scripts/config/CharConfig.hx');
 
 function onCreate() {
 	game.setOnHScript('getScoreTxt', getScoreTxt);
-	game.setOnHScript('daRating', daRating);
 	game.setOnHScript('getChar', getChar);
 	game.setOnHScript('isJsonEmpty', isJsonEmpty);
 	game.setOnHScript('triggerSelectSound', triggerSelectSound);
@@ -212,7 +211,7 @@ function onResume() {
 }
 
 function onDestroy() {
-	if (ClientPrefs.data.pauseMusic == 'None' && OptionsState.onPlayState) FlxG.sound.music.stop(); // fix lmao
+	if (ClientPrefs.data.pauseMusic == 'None' && OptionsState.onPlayState) FlxG.sound.music.stop(); // fix crash in options state...
 	
 	if (getModSetting('h024PauseMusic', getVar('currentModDirectory')) != 'ClientPrefs') ClientPrefs.data.pauseMusic = pauseMusic;
 
@@ -223,12 +222,6 @@ function getScoreTxt(score:Int) {
 	return 'Score: ' + score
 	+ (!game.instakillOnMiss ? ' | Misses: ' + game.songMisses : '')
 	+ ' | Rating: ' + getVar('ratingStr') + '\n';
-}
-
-function daRating(name:String) {
-	for (rating in game.ratingsData)
-	if (rating.name == name)
-	return rating;
 }
 
 function getChar(?index:Int = 0) {

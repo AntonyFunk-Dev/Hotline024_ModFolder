@@ -1,15 +1,14 @@
 import flixel.FlxObject;
-import openfl.geom.Point;
 import backend.MusicBeatState;
 import substates.GameOverSubstate;
 
 var camFollow:FlxObject;
-var rnd:Int = 0;
+var randomNum:Int = 0;
 
 function onGameOver() {
-	rnd = FlxG.random.int(1, 100);
+	randomNum = FlxG.random.int(1, 100);
 
-	GameOverSubstate.characterName = (rnd != 1 ? 'death' : 'deathfucked');
+	GameOverSubstate.characterName = (randomNum != 1 ? 'death' : 'deathfucked');
 	GameOverSubstate.deathSoundName = 'fnf_loss_sfx_h24';
 	GameOverSubstate.loopSoundName = 'gameOver_h24';
 	GameOverSubstate.endSoundName = 'gameOverEnd_h24';
@@ -42,7 +41,7 @@ function onGameOverConfirm() {
 		new FlxTimer().start(2, function(tmr:FlxTimer) {
 			MusicBeatState.resetState();
 		});
-	}); // xd
+	}); // prevent certain bug...
 
 	return;
 }
@@ -50,7 +49,7 @@ function onGameOverConfirm() {
 function onUpdate(elapsed) {
 	if (!game.isDead) return;
 
-	if (rnd == 1) FlxG.sound.music.pitch = 0.25;
+	if (randomNum == 1) FlxG.sound.music.pitch = 0.25;
 
 	if (GameOverSubstate.instance.boyfriend.isAnimationNull() != null && GameOverSubstate.instance.boyfriend.getAnimationName() == 'firstDeath') {
 		if (GameOverSubstate.instance.boyfriend.isAnimationFinished()) FlxG.camera.fade(FlxColor.BLACK, 2, true);

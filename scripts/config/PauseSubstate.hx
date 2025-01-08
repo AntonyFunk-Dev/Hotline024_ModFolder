@@ -10,9 +10,6 @@ import psychlua.FunkinLua;
 
 var dir:String = 'menus/pause/';
 
-var optionsKeyboard:String = 'CONTROL';
-var optionsController:String = 'X';
-
 var menuItems:Array<String> = [];
 var menuItemsOG:Array<String> = ['resume', 'restart', 'botplay', 'practice', 'exit'];
 
@@ -227,7 +224,7 @@ function onCustomSubstateUpdate(name, elapsed) {
 
 		if (pauseMusic.volume < 0.5) pauseMusic.volume += 0.01 * elapsed;
 
-		optionTxt.text = 'Press \'' + (controls.controllerMode ? optionsController : optionsKeyboard).toUpperCase() + '\' to access the Options Menu';
+		optionTxt.text = 'Press \'' + (controls.controllerMode ? 'X' : 'CTRL') + '\' to access the Options Menu';
 	}
 
 	return;
@@ -315,7 +312,7 @@ function onCustomSubstateUpdatePost(name, elapsed) {
 			}
 		}
 
-		if (keyboardJustPressed(optionsKeyboard) || anyGamepadJustPressed(optionsController)) {
+		if (keyboardJustPressed('CONTROL') || anyGamepadJustPressed('X')) {
 			PlayState.instance.paused = true; // For lua
 			PlayState.instance.vocals.volume = 0;
 

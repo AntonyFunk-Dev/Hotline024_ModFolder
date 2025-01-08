@@ -12,11 +12,7 @@ var charJson:Array<Dynamic> = [null, null, null];
 var tweens:Array<FlxTween> = [];
 
 function onCreatePost() {
-    for (i in 0...3) {
-        tweens.push(null);
-
-        if (getChar(i) != null) initCharConfig(i, getChar(i));
-    }
+    for (i in 0...3) if (getChar(i) != null) initCharConfig(i, getChar(i));
     
     return;
 }
@@ -34,7 +30,7 @@ function onBeatHit() {
         }
 
         tweens[i] = FlxTween.tween(getChar(i), {y: charArray[i].posY}, charJson[i].speed ?? 1.0, {
-            ease: LuaUtils.getTweenEaseByString(charJson[i].ease ?? "linear")
+            ease: LuaUtils.getTweenEaseByString(charJson[i].ease ?? 'linear')
         });
     }
 
@@ -74,7 +70,7 @@ function initCharConfig(?charType:Int = 0, ?char:Character = null) {
         if (tweens[charType] != null && tweens[charType].active) tweens[charType].cancel();
         tweens[charType] = FlxTween.tween(char, {y: charArray[charType].posY + (charJson[charType].amount ?? 0)}, 
         (charJson[charType].speed ?? 1.0) * FlxG.random.float(0.85, 1.2), {
-            ease: LuaUtils.getTweenEaseByString(charJson[charType].ease ?? "linear"),
+            ease: LuaUtils.getTweenEaseByString(charJson[charType].ease ?? 'linear'),
             type: LuaUtils.getTweenTypeByString('pingpong')
         });
     }

@@ -119,37 +119,37 @@ function onPrepareCutscene() {
 	cutscene.push(logo);
 	cutscene.push(skpTxt);
 
-	cutscene.endTime = skipSongPos;
+	cutscene.endTime = skipSongPos / game.playbackRate;
 
 	cutscene.onStart = function() {
-		FlxTween.tween(skpTxt, {alpha: 1}, 0.5, {ease: FlxEase.linear});
-		FlxTween.tween(col, {alpha: 0}, 4, {ease: FlxEase.linear, startDelay: 1});
+		FlxTween.tween(skpTxt, {alpha: 1}, 0.5 / game.playbackRate, {ease: FlxEase.linear});
+		FlxTween.tween(col, {alpha: 0}, 4 / game.playbackRate, {ease: FlxEase.linear, startDelay: 1 / game.playbackRate});
 	};
 
-	cutscene.timer(4.5, function() {		 
-		FlxTween.tween(col, {alpha: 1}, 1, {ease: FlxEase.quartIn});
-		FlxTween.tween(logo, {y: logo.y + 500}, 1, {ease: FlxEase.quartIn});
+	cutscene.timer(4.5 / game.playbackRate, function() {		 
+		FlxTween.tween(col, {alpha: 1}, 1 / game.playbackRate, {ease: FlxEase.quartIn});
+		FlxTween.tween(logo, {y: logo.y + 500}, 1 / game.playbackRate, {ease: FlxEase.quartIn});
 	});
 
-	cutscene.timer(5.55, function() {
+	cutscene.timer(5.55 / game.playbackRate, function() {
 		bg.visible = false;
 		txt.visible = true;
 		col.visible = false;
 
-		FlxFlicker.flicker(txt, 0.2, 0.02);
+		FlxFlicker.flicker(txt, 0.2 / game.playbackRate, 0.02 / game.playbackRate);
 	});
 
-	cutscene.timer(8.14, function() {
+	cutscene.timer(8.14 / game.playbackRate, function() {
 		xtrTxt.visible = true;
 
-		FlxFlicker.flicker(xtrTxt, 0.2, 0.02);
+		FlxFlicker.flicker(xtrTxt, 0.2 / game.playbackRate, 0.02 / game.playbackRate);
 	});
 
-	cutscene.timer(10.3, function() {
+	cutscene.timer(10.3 / game.playbackRate, function() {
 		bg.visible = true;
 		bg.alpha = 0.25;
 
-		FlxFlicker.flicker(bg, 0.1, 0.04, true, true, function() {
+		FlxFlicker.flicker(bg, 0.1 / game.playbackRate, 0.04 / game.playbackRate, true, true, function() {
 			bg.visible = false;
 		});
 	});
@@ -172,7 +172,7 @@ function onFinishTransition() {
 
 	xtrTxt.visible = true;
 
-	FlxFlicker.flicker(col, 0.18, 0.05, true, true, function() {
+	FlxFlicker.flicker(col, 0.18 / game.playbackRate, 0.05 / game.playbackRate, true, true, function() {
 		game.camGame.alpha = 1.0;
 		game.camHUD.alpha = 1.0;
 

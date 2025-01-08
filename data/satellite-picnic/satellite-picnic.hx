@@ -1,7 +1,5 @@
-import flixel.effects.FlxFlicker;
 import flixel.text.FlxText;
 import flixel.sound.FlxSound;
-import backend.BaseStage;
 import cutscenes.CutsceneHandler;
 
 var skipKey:String = 'accept';
@@ -99,45 +97,46 @@ function onPrepareCutscene() {
 	
 	cutscene = new CutsceneHandler();
 
-	cutscene.endTime = 12;
+	cutscene.endTime = 12 / game.playbackRate;
 
 	setVar('updateCamera', false);
 
 	cutscene.onStart = function() {
 		game.moveCamera(true);
 
-		FlxTween.tween(col, {alpha: 0}, 3, {ease: FlxEase.linear, startDelay: 1});
+		FlxTween.tween(col, {alpha: 0}, 3 / game.playbackRate, {ease: FlxEase.linear, startDelay: 1 / game.playbackRate});
 
 		cutsceneSound.play();
+		cutsceneSound.pitch = game.playbackRate;
 
 		game.boyfriend.playAnim('sit', true);
 	};
 
-	cutscene.timer(1.2, function() {
-		FlxTween.tween(skpTxt, {alpha: 1}, 0.5, {ease: FlxEase.linear});
+	cutscene.timer(1.2 / game.playbackRate, function() {
+		FlxTween.tween(skpTxt, {alpha: 1}, 0.5 / game.playbackRate, {ease: FlxEase.linear});
 
 		game.dad.playAnim('1shock', true);
 	});
 
-	cutscene.timer(4.4, function() {
+	cutscene.timer(4.4 / game.playbackRate, function() {
 		game.dad.playAnim('2shock', true);
 	});
 
-	cutscene.timer(7.1, function() {
+	cutscene.timer(7.1 / game.playbackRate, function() {
 		game.boyfriend.playAnim('1shock', true);
 		game.dad.playAnim('3shock', true);
 	});
 
-	cutscene.timer(7.5, function() {
+	cutscene.timer(7.5 / game.playbackRate, function() {
 		game.boyfriend.playAnim('2shock', true);
 	});
 
-	cutscene.timer(8.9, function() {
+	cutscene.timer(8.9 / game.playbackRate, function() {
 		game.boyfriend.playAnim('3shock', true);
 	});
 
-	cutscene.timer(11, function() {
-		FlxTween.tween(skpTxt, {alpha: 0}, 0.5, {ease: FlxEase.linear});
+	cutscene.timer(11 / game.playbackRate, function() {
+		FlxTween.tween(skpTxt, {alpha: 0}, 0.5 / game.playbackRate, {ease: FlxEase.linear});
 	});
 
 	cutscene.finishCallback = onFinishCutscene;
@@ -169,6 +168,9 @@ function onFinishTransition() {
 		onComplete: () -> {
 			setVar('updateCamera', true);
 
+			game.boyfriend.dance();
+			game.dad.dance();
+
 			for (obj in objects) {
 				obj.kill();
 				obj.destroy();
@@ -184,7 +186,6 @@ function onFinishTransition() {
 			});
 
 			game.inCutscene = false;
-
 			game.startCountdown();
 		}
 	});

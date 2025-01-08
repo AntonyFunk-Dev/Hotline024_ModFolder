@@ -3,6 +3,8 @@ import flixel.group.FlxTypedSpriteGroup;
 import cutscenes.CutsceneHandler;
 import psychlua.LuaUtils;
 
+var dir:String = 'stages/hallway/cutscene/';
+
 var cutscene:CutsceneHandler;
 var cutsceneInit:Bool = false;
 var cutsceneStart:Bool = false;
@@ -23,25 +25,23 @@ function onCreate() {
     cutsceneGroup = new FlxTypedSpriteGroup();
     cutsceneGroup.cameras = [getVar('camCutscene')];
 
-    for (i in 0...9) twnArray.push(var twn:FlxTween = null);
-
-    nikku_b = new FlxSprite().loadGraphic(Paths.image('stages/hallway/cutscene/1'));
+    nikku_b = new FlxSprite().loadGraphic(Paths.image(dir + '1'));
     cutsceneGroup.add(nikku_b);
 
-    nikku_h = new FlxSprite().loadGraphic(Paths.image('stages/hallway/cutscene/2'));
+    nikku_h = new FlxSprite().loadGraphic(Paths.image(dir + '2'));
     cutsceneGroup.add(nikku_h);
 
-    dialog_box = new FlxSprite().loadGraphic(Paths.image('stages/hallway/cutscene/3'));
+    dialog_box = new FlxSprite().loadGraphic(Paths.image(dir + '3'));
     cutsceneGroup.add(dialog_box);
 
-    sans_text = new FlxSprite().loadGraphic(Paths.image('stages/hallway/cutscene/4'));
+    sans_text = new FlxSprite().loadGraphic(Paths.image(dir + '4'));
     cutsceneGroup.add(sans_text);
 
-    buttons = new FlxSprite().loadGraphic(Paths.image('stages/hallway/cutscene/5'));
+    buttons = new FlxSprite().loadGraphic(Paths.image(dir + '5'));
     cutsceneGroup.add(buttons);
 
     toby_dog = new FlxSprite();
-    toby_dog.frames = Paths.getSparrowAtlas('stages/hallway/cutscene/6');
+    toby_dog.frames = Paths.getSparrowAtlas(dir + '6');
     toby_dog.animation.addByPrefix('idle', 'Toby Dog', 5, true);
     cutsceneGroup.add(toby_dog);
 
@@ -64,10 +64,10 @@ function onEvent(name, value1, value2) {
         flash.alpha = 1;
 
         if (twn_alpha != null && twn_alpha.active) twn_alpha.cancel();
-        twn_alpha = FlxTween.tween(game.camHUD, {alpha: 0}, (Conductor.crochet / 1000) * 2, {ease: FlxEase.quartOut});
+        twn_alpha = FlxTween.tween(game.camHUD, {alpha: 0}, (Conductor.crochet / 1000) * 2 / game.playbackRate, {ease: FlxEase.quartOut});
 
         if (twn != null && twn.active) twn.cancel();
-        twn = FlxTween.tween(flash, {alpha: 0}, (Conductor.crochet / 1000));
+        twn = FlxTween.tween(flash, {alpha: 0}, (Conductor.crochet / 1000) / game.playbackRate);
 
         add(cutsceneGroup);
 
@@ -84,12 +84,12 @@ function onEvent(name, value1, value2) {
 
         cutsceneStart = false;
         
-        cutscene.endTime = 7.5;
+        cutscene.endTime = 7.5 / game.playbackRate;
 
         cutscene.onStart = function() {
             nikku_b.alpha = nikku_h.alpha = 0;
 
-            twnArray[0] = FlxTween.num(-5, 5, (Conductor.crochet / 1000) * 1.5, {
+            twnArray[0] = FlxTween.num(-5, 5, (Conductor.crochet / 1000) * 1.5 / game.playbackRate, {
                 type: LuaUtils.getTweenTypeByString('pingpong'),
                 onUpdate: () -> {
                     nikku_b.y = nikku_h.y = ((FlxG.height - nikku_b.height) / 2) + twnArray[0].value;
@@ -99,51 +99,51 @@ function onEvent(name, value1, value2) {
                 }
             });
         
-            twnArray[1] = FlxTween.tween(nikku_b, {alpha: 1}, 5, {startDelay: 0.2});
-            twnArray[2] = FlxTween.tween(nikku_h, {alpha: 1}, 5, {startDelay: 0.2});
+            twnArray[1] = FlxTween.tween(nikku_b, {alpha: 1}, 5 / game.playbackRate, {startDelay: 0.2});
+            twnArray[2] = FlxTween.tween(nikku_h, {alpha: 1}, 5 / game.playbackRate, {startDelay: 0.2});
 
-            twnArray[3] = FlxTween.tween(nikku_b.scale, {x: 3, y: 3}, 8);
-            twnArray[4] = FlxTween.tween(nikku_h.scale, {x: 3, y: 3}, 8);
+            twnArray[3] = FlxTween.tween(nikku_b.scale, {x: 3, y: 3}, 8 / game.playbackRate);
+            twnArray[4] = FlxTween.tween(nikku_h.scale, {x: 3, y: 3}, 8 / game.playbackRate);
 
-            twnArray[5] = FlxTween.tween(dialog_box.offset, {y: -560}, 1.5, {
+            twnArray[5] = FlxTween.tween(dialog_box.offset, {y: -560}, 1.5 / game.playbackRate, {
                 onUpdate: () -> {
                     sans_text.offset.y = dialog_box.offset.y;
                 }
             });
             
-            twnArray[6] = FlxTween.tween(dialog_box, {angle: -25}, 3, {
+            twnArray[6] = FlxTween.tween(dialog_box, {angle: -25}, 3 / game.playbackRate, {
                 onUpdate: () -> {
                     sans_text.angle = dialog_box.angle;
                 }
             });
 
-            twnArray[7] = FlxTween.tween(buttons.offset, {y: -450}, 1);
-            twnArray[8] = FlxTween.tween(buttons, {angle: 25}, 2);
+            twnArray[7] = FlxTween.tween(buttons.offset, {y: -450}, 1 / game.playbackRate);
+            twnArray[8] = FlxTween.tween(buttons, {angle: 25}, 2 / game.playbackRate);
 
             nikku_b.visible = nikku_h.visible = true;
         };
 
-        cutscene.timer(0.45, function() {
+        cutscene.timer(0.45 / game.playbackRate, function() {
             sans_text.visible = false;
             dialog_box.scale.x = 0.5;
         });
 
-        cutscene.timer(0.5, function() {
+        cutscene.timer(0.5 / game.playbackRate, function() {
             dialog_box.scale.x = 0;
         });
     
-        cutscene.timer(5.18, function() {
-            FlxFlicker.flicker(nikku_b, (Conductor.crochet / 1000), (Conductor.crochet / 1000) / 2, false);
-            FlxFlicker.flicker(nikku_h, (Conductor.crochet / 1000), (Conductor.crochet / 1000) / 2, false, true, () -> {
+        cutscene.timer(5.18 / game.playbackRate, function() {
+            FlxFlicker.flicker(nikku_b, (Conductor.crochet / 1000) / game.playbackRate, (Conductor.crochet / 1000) / 2 / game.playbackRate, false);
+            FlxFlicker.flicker(nikku_h, (Conductor.crochet / 1000) / game.playbackRate, (Conductor.crochet / 1000) / 2 / game.playbackRate, false, true, () -> {
                 toby_dog.animation.play('idle', true);
                 toby_dog.visible = true;
             });
         });
 
-        cutscene.timer(7.2, function() {
+        cutscene.timer(7.2 / game.playbackRate, function() {
             if (FlxFlicker.isFlickering(toby_dog)) FlxFlicker.stopFlickering(toby_dog);
 
-            FlxFlicker.flicker(toby_dog, (Conductor.crochet / 1000), (Conductor.stepCrochet / 1000) / 2);
+            FlxFlicker.flicker(toby_dog, (Conductor.crochet / 1000) / game.playbackRate, (Conductor.stepCrochet / 1000) / 2 / game.playbackRate);
         });
 
         cutscene.finishCallback = function() {		 
@@ -170,7 +170,7 @@ function resetAnimation() {
         cutscene = null;
     }
 
-    for (twn in twnArray) {
+    for (twn in twnArray) {    
         if (twn != null && twn.active) {
             twn.cancel();
             twn = null;

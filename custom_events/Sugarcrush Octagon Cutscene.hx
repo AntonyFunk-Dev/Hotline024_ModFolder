@@ -4,7 +4,8 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxTypedSpriteGroup;
 import cutscenes.CutsceneHandler;
 import psychlua.ModchartSprite;
-import psychlua.LuaUtils;
+
+var dir:String = 'stages/skatepark/octagon/';
 
 var cutscene:CutsceneHandler;
 var cutsceneInit:Bool = false;
@@ -33,12 +34,12 @@ function onCreate() {
     grid_overlay.antialiasing = ClientPrefs.data.antialiasing;
     cutsceneGroup.add(grid_overlay);
 
-    var spr = new FlxSprite().loadGraphic(Paths.image('stages/skatepark/octagon/numbah_eight'));
+    var spr = new FlxSprite().loadGraphic(Paths.image(dir + 'numbah_eight'));
 
     numbah_eigth_1 = new FlxBackdrop(spr.graphic, 0x11, 0, spr.height);
     numbah_eigth_1.antialiasing = ClientPrefs.data.antialiasing;
     numbah_eigth_1.screenCenter();
-    numbah_eigth_1.velocity.x = 150;
+    numbah_eigth_1.velocity.x = 150 * game.playbackRate;
     cutsceneGroup.add(numbah_eigth_1);
 
     numbah_eigth_2 = new FlxBackdrop(spr.graphic, 0x11, 0, spr.height);
@@ -49,7 +50,7 @@ function onCreate() {
     cutsceneGroup.add(numbah_eigth_2);
 
     nikku = new ModchartSprite();
-    nikku.frames = Paths.getSparrowAtlas('stages/skatepark/octagon/nikku');
+    nikku.frames = Paths.getSparrowAtlas(dir + 'nikku');
     nikku.animation.addByPrefix('idle', 'Nikku Last Frame', 1, false);
     nikku.animation.addByPrefix('move', 'Nikku Move 1', 24, true);
     nikku.antialiasing = ClientPrefs.data.antialiasing;
@@ -57,13 +58,13 @@ function onCreate() {
     nikku.addOffset('move', 360, 345);
     cutsceneGroup.add(nikku);
 
-    textbox = new FlxSprite().loadGraphic(Paths.image('stages/skatepark/octagon/textbox'));
+    textbox = new FlxSprite().loadGraphic(Paths.image(dir + 'textbox'));
     textbox.antialiasing = ClientPrefs.data.antialiasing;
     textbox.origin.set(0, textbox.height);
     cutsceneGroup.add(textbox);
 
     text = new FlxSprite();
-    text.frames = Paths.getSparrowAtlas('stages/skatepark/octagon/text');
+    text.frames = Paths.getSparrowAtlas(dir + 'text');
     text.animation.addByPrefix('text', 'Text', 24, false);
     text.antialiasing = ClientPrefs.data.antialiasing;
     text.scale.set(0.6, 0.6);
@@ -73,7 +74,7 @@ function onCreate() {
     text.y -= 50;
     cutsceneGroup.add(text);
 
-    octagon = new FlxSprite().loadGraphic(Paths.image('stages/skatepark/octagon/octagon'));
+    octagon = new FlxSprite().loadGraphic(Paths.image(dir + 'octagon'));
     octagon.antialiasing = ClientPrefs.data.antialiasing;
     octagon.scale.set(0.7, 0.7);
     octagon.updateHitbox();
@@ -81,14 +82,14 @@ function onCreate() {
     octagon.y += 80;
     cutsceneGroup.add(octagon);
 
-    hereletme = new FlxSprite().loadGraphic(Paths.image('stages/skatepark/octagon/hereletme'));
+    hereletme = new FlxSprite().loadGraphic(Paths.image(dir + 'hereletme'));
     hereletme.antialiasing = ClientPrefs.data.antialiasing;
     hereletme.scale.set(0.7, 0.7);
     hereletme.updateHitbox();
     hereletme.x = ((FlxG.width / 3) - hereletme.width) / 2;
     cutsceneGroup.add(hereletme);
 
-    showyou = new FlxSprite().loadGraphic(Paths.image('stages/skatepark/octagon/showyou'));
+    showyou = new FlxSprite().loadGraphic(Paths.image(dir + 'showyou'));
     showyou.antialiasing = ClientPrefs.data.antialiasing;
     showyou.scale.set(0.7, 0.7);
     showyou.updateHitbox();
@@ -117,7 +118,7 @@ function onEvent(name, value1, value2) {
 
         cutscene = new CutsceneHandler();
         
-        cutscene.endTime = 13.2;
+        cutscene.endTime = 13.2 / game.playbackRate;
 
         cutscene.onStart = function() {
             FlxG.camera.visible = false;
@@ -126,15 +127,15 @@ function onEvent(name, value1, value2) {
 
             FlxFlicker.flicker(flash, 0.001, 0.0001, false);
 
-            twnArray[0] = FlxTween.tween(col, {alpha: 0}, 0.2);
-
-            twnArray[1] = FlxTween.tween(nikku, {x: 210, y: 265}, 0.2);
-
             nikku.playAnim('move', true);
+
+            twnArray[0] = FlxTween.tween(col, {alpha: 0}, 0.2 / game.playbackRate);
+
+            twnArray[1] = FlxTween.tween(nikku, {x: 210, y: 265}, 0.2 / game.playbackRate);
         };
 
-        cutscene.timer(0.15, function() {
-            twnArray[2] = FlxTween.tween(textbox.scale, {x: 1.28, y: 1.28}, 0.2, {
+        cutscene.timer(0.15 / game.playbackRate, function() {
+            twnArray[2] = FlxTween.tween(textbox.scale, {x: 1.28, y: 1.28}, 0.2 / game.playbackRate, {
                 onComplete: () -> {
                     text.alpha = 1;
                 }
@@ -145,25 +146,25 @@ function onEvent(name, value1, value2) {
             textbox.alpha = 1;
         });
 
-        cutscene.timer(4, function() {
-            twnArray[3] = FlxTween.tween(octagon, {x: octagon.x - 360}, 0.1);
+        cutscene.timer(4 / game.playbackRate, function() {
+            twnArray[3] = FlxTween.tween(octagon, {x: octagon.x - 360}, 0.1 / game.playbackRate);
 
             octagon.alpha = 1;
         });
 
-        cutscene.timer(11.5, function() {
-            twnArray[4] = FlxTween.tween(nikku, {x: 500}, 0.2, {
+        cutscene.timer(11.5 / game.playbackRate, function() {
+            twnArray[4] = FlxTween.tween(nikku, {x: 500}, 0.2 / game.playbackRate, {
                 onComplete: () -> {
                     nikku.playAnim('idle', true);
 
-                    twnArray[4] = FlxTween.tween(nikku.scale, {x: 1.8, y: 1.8}, 2);
+                    twnArray[4] = FlxTween.tween(nikku.scale, {x: 1.8, y: 1.8}, 2 / game.playbackRate);
                 }
             });
 
-            twnArray[5] = FlxTween.tween(octagon, {x: FlxG.width}, 0.1);
+            twnArray[5] = FlxTween.tween(octagon, {x: FlxG.width}, 0.1 / game.playbackRate);
 
-            twnArray[6] = FlxTween.tween(hereletme, {y: (FlxG.height - hereletme.height) / 2}, 0.3);
-            twnArray[7] = FlxTween.tween(showyou, {y: (FlxG.height - showyou.height) / 2}, 0.3);
+            twnArray[6] = FlxTween.tween(hereletme, {y: (FlxG.height - hereletme.height) / 2}, 0.3 / game.playbackRate);
+            twnArray[7] = FlxTween.tween(showyou, {y: (FlxG.height - showyou.height) / 2}, 0.3 / game.playbackRate);
 
             textbox.alpha = 0;
             text.alpha = 0;
@@ -172,8 +173,8 @@ function onEvent(name, value1, value2) {
             showyou.alpha = 1;
         });
 
-        cutscene.timer(12.5, function() {
-            FlxFlicker.flicker(flash, 0.85, 0.05);
+        cutscene.timer(12.5 / game.playbackRate, function() {
+            FlxFlicker.flicker(flash, 0.85 / game.playbackRate, 0.04 / game.playbackRate);
         });
 
         cutscene.finishCallback = function() {		 
@@ -200,7 +201,6 @@ function resetAnimation() {
     if (FlxFlicker.isFlickering(flash)) FlxFlicker.stopFlickering(flash);
 
     nikku.scale.set(1.7, 1.7);
-    nikku.updateHitbox();
     nikku.x = -nikku.width;
     nikku.y = FlxG.height;
     

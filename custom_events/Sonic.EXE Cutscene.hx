@@ -1,9 +1,10 @@
 import flixel.effects.FlxFlicker;
 import flixel.addons.display.FlxBackdrop;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxTypedSpriteGroup;
 import cutscenes.CutsceneHandler;
 import psychlua.LuaUtils;
+
+var dir:String = 'stages/skatepark/cutscene/';
 
 var cutscene:CutsceneHandler;
 var cutsceneInit:Bool = false;
@@ -24,14 +25,14 @@ function onCreate() {
     cutsceneGroup = new FlxTypedSpriteGroup();
     cutsceneGroup.cameras = [getVar('camCutscene')];
 
-    bg = new FlxBackdrop(Paths.image('stages/skatepark/cutscene/background'), 0x01);
+    bg = new FlxBackdrop(Paths.image(dir + 'background'), 0x01);
     bg.scale.set(3, 3);
     bg.updateHitbox();
     bg.screenCenter();
-    bg.velocity.x = -750;
+    bg.velocity.x = -750 * game.playbackRate;
     cutsceneGroup.add(bg);
 
-    floor = new FlxBackdrop(Paths.image('stages/skatepark/cutscene/ground'), 0x01);
+    floor = new FlxBackdrop(Paths.image(dir + 'ground'), 0x01);
     floor.scale.set(bg.scale.x, bg.scale.y);
     floor.updateHitbox();
     floor.screenCenter();
@@ -39,19 +40,19 @@ function onCreate() {
     floor.y += bg.height / 3 + 10;
     cutsceneGroup.add(floor);
 
-    exe = new FlxSprite().loadGraphic(Paths.image('stages/skatepark/cutscene/exe'));
+    exe = new FlxSprite().loadGraphic(Paths.image(dir + 'exe'));
     exe.scale.set(5, 5);
     exe.updateHitbox();
     exe.screenCenter(0x10);
     cutsceneGroup.add(exe);
 
-    nikku = new FlxSprite().loadGraphic(Paths.image('stages/skatepark/cutscene/nikku'));
+    nikku = new FlxSprite().loadGraphic(Paths.image(dir + 'nikku'));
     nikku.scale.set(4, 4);
     nikku.updateHitbox();
     nikku.screenCenter();
     cutsceneGroup.add(nikku);
 
-    plants = new FlxBackdrop(Paths.image('stages/skatepark/cutscene/leaves'), 0x01);
+    plants = new FlxBackdrop(Paths.image(dir + 'leaves'), 0x01);
     plants.scale.set(floor.scale.x * 2, floor.scale.y * 2);
     plants.updateHitbox();
     plants.screenCenter();
@@ -82,7 +83,7 @@ function onEvent(name, value1, value2) {
 
         cutscene = new CutsceneHandler();
         
-        cutscene.endTime = 6.5;
+        cutscene.endTime = 6.5 / game.playbackRate;
 
         cutscene.onStart = function() {
             FlxG.camera.visible = false;
@@ -92,11 +93,11 @@ function onEvent(name, value1, value2) {
 
             FlxFlicker.flicker(flash, 0.001, 0.0001, false);
 
-            twnArray[0] = FlxTween.tween(col, {alpha: 0}, 0.2);
+            twnArray[0] = FlxTween.tween(col, {alpha: 0}, 0.2 / game.playbackRate);
 
-            twnArray[1] = FlxTween.tween(exe, {x: nikku.x}, 8);
+            twnArray[1] = FlxTween.tween(exe, {x: nikku.x}, 8 / game.playbackRate);
 
-            twnArray[2] = FlxTween.tween(exe, {y: exe.y - 10}, 0.16, {
+            twnArray[2] = FlxTween.tween(exe, {y: exe.y - 10}, 0.16 / game.playbackRate, {
                 ease: FlxEase.smoothStepInOut,
                 type: LuaUtils.getTweenTypeByString('pingpong'),
                 onUpdate: () -> {
@@ -106,8 +107,8 @@ function onEvent(name, value1, value2) {
 
         };
 
-        cutscene.timer(6.3, function() {
-            FlxFlicker.flicker(flash, 0.5, 0.05);
+        cutscene.timer(6.3 / game.playbackRate, function() {
+            FlxFlicker.flicker(flash, 0.5 / game.playbackRate, 0.04 / game.playbackRate);
         });
 
         cutscene.finishCallback = function() {		 

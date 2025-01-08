@@ -50,7 +50,6 @@ function onCreate() {
 
 var twnArray:Array<FlxTween> = [];
 function onCreatePost() {
-	for (i in 0...3) twnArray.push(var twn:FlxTween = null);
 	if (ClientPrefs.data.lowQuality) comboGlow.kill();
 
 	game.remove(game.comboGroup);
@@ -207,4 +206,10 @@ function ratingScore() {
 	}
 
 	FlxFlicker.flicker(comboHitTxt, 0, 0.05);
+}
+
+function daRating(name:String) {
+	for (rating in game.ratingsData)
+	if (rating.name == name)
+	return rating;
 }
