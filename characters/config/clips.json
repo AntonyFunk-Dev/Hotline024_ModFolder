@@ -1,0 +1,6 @@
+{
+	"type": 0,
+	"speed": 1.5,
+	"ease": "smoothStepInOut",
+	"amount": -50
+}

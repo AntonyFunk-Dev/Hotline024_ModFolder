@@ -3,25 +3,49 @@
 		"save": "h024ScoreCounter",
 		"name": "Hotline Score Counter",
 		"type": "bool",
-		"description": "If unchecked, the Hotline 024 Score Counter is disabled\n(This action may improve performance).",
+		"description": "If unchecked, the H024 Score Counter is disabled\n(This action may improve performance).",
 		"value": true
+	},
+	{
+		"save": "h024NikkuStyleMenu",
+		"name": "Nikku Style Menu",
+		"type": "bool",
+		"description": "if unchecked, the Nikku Style Menu is disabled\n(If you have performance problems, you can activate the 'Low Quality' option).",
+		"value": true
+	},
+	{
+		"save": "h024NikkuStyle",
+		"name": "Set Nikku's Style:",
+		"type": "string",
+		"description": "Select a different Nikku's style\n(if the 'Nikku Select Menu' is unchecked)",
+		"value": "Nikku",
+		"format": "%v",
+
+		"options": ["Nikku", "Nikku 24", "Nikku Jojo", "Nikku Classic"]
 	},
 	{
 		"save": "h024PauseMenu",
 		"name": "Hotline Pause Menu",
 		"type": "bool",
-		"description": "if unchecked, the Hotline 024 Pause Menu is disabled\n(If you have performance problems in the pause menu, you can activate the 'Low Quality' option).",
+		"description": "if unchecked, the H024 Pause Menu is disabled\n(If you have performance problems, you can activate the 'Low Quality' option).",
 		"value": true
 	},
 	{
 		"save": "h024PauseMusic",
 		"name": "Set Pause Music:",
 		"type": "string",
-		"description": "Select the different tracks from Hotline 024 or those available in the Psych Client Preferences.",
+		"description": "Select the different tracks from H024 or those available in the Psych Client Preferences.",
 		"value": "Memories",
 		"format": "%v",
 
-		"options": ["ClientPrefs", "Memories"]
+		"options": ["ClientPrefs", "Dreamfield", "Nightlight", "Memories", "Misfortunate"]
+	},
+	{
+		"save": "h024GameOver",
+		"name": "Hotline Game Over",
+		"type": "bool",
+		"description": "if unchecked, the H024 Game Over is disabled.\n(if checked, you have a 1 in 100 chance of seeing something... 'special')",
+		"value": true
 	}
 ]
 

@@ -1,0 +1,47 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "Nikku Last Frame"
+		},
+		{
+			"offsets": [
+				332,
+				330
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "move",
+			"loop": true,
+			"name": "Nikku Move 1"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "stages/skatepark/octagon/nikku",
+	"position": [
+		-300,
+		-100
+	],
+	"healthicon": "gf",
+	"flip_x": false,
+	"healthbar_colors": [
+		165,
+		0,
+		77
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1.6,
+	"_editor_isPlayer": false
+}

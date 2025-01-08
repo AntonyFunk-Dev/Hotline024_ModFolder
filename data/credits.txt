@@ -1,2 +1,45 @@
 H024 ModFolder Porter
-AntonyFunk - Dev::Coder and Porter for Psych Engine::Hey its me, a fun coder :) (my english so bad bruh-)::https://youtube.com/@antonyfunkin?si=9n4IhdLEEbfuu_w_::0xFFFFFFFF
+AntonyFunk - Dev::ant::Coder and Porter H024 for Psych Engine\nHey its me, a fun coder :)::https://youtube.com/@antonyfunkin?si=9n4IhdLEEbfuu_w_::0xFFFFFFFF
+
+H024 Team
+Saruky::saru::Director, Musician::https://x.com/Saruky__::0xFF3368FB
+VaChildish::BigBand::Artist, Jojo Nikku's Assets::https://x.com/BiggieDoodle::0xFFFB2E5F
+BAnims::BAnims::Artist, Character Renders, Mazin's Assets, Rude#1's Assets, Charted Fun is Infinite::https://x.com/BAnims_the2nd::0xFFEDB61E
+SajiArts::Saji::Artist, Xigmund's Assets::https://x.com/sajiarts_::0xFFF9663C
+MaxOKE::MaxOKE::Artist, Momo and Gogo's Renders, Nikku's Freeplay Render::https://x.com/MaxOKE_::0xFFAB0931
+Offbi::Offbi::Artist, Main Menu Character Renders::https://x.com/Officiallythat2::0xFFF93645
+SaltedSporks::SaltedSporks::Artist, Musician, Boo's Stage Assets, Co-producer of Satellite Picnic::https://x.com/saltedsporks::0xFFE9BD37
+Sugarratio::SugarRatio::Artist, Momo and Gogo's Assets::https://x.com/SugarRatio::0xFF60FEA8
+gibz679::Gibz::Charter, Charted Killer Queen, Mirror Magic::https://x.com/9766Gibz::0xFFFED752
+Melissa MekRose::Melissa::Voice Actress, Matzushii's VA::https://x.com/Ms_Mekrose::0xFFFB735D
+Nebits::Nebits::Artist, Clip's Assets::https://x.com/Nebits_art::0xFFB45BB9
+PointyyESM::Pointy::Charter, Charted Promenade::https://x.com/PointyyESM::0xFF989898
+Mr.DJ::MRDJ::Artist, Nikku's Remastered Assets::https://x.com/Mstr_DJ::0xFFCEB3DA
+Chroma::Chroma::Charter, Charted Broadcasting (Collab with 10ju), CG Megamix, Thunderstorm (Collab with Gibz679)::https://x.com/Chromaatical::0xFFF23849
+Fabs::Fabs::Main Programmer, Co-director, 3D Artist, Nikku's 3D Assets::https://x.com/SGIObama::0xFF7F7F7F
+Cerbera::Cerbera::Charter, Charted Overdrive, Uncanny Valley, Astral Projection::https://x.com/Cerberaa::0xFFF14ACD
+Niffirg::niffirg::Charter, Charted Extraterrestrial, Sussy Pussy, Close Chuckle::https://x.com/n1ffirg::0xFF391BBD
+Lavaprox::Lavaprox::Artist, Promotional Art::https://x.com/lavaprx::0xFFFF8156
+ABrickToTheHead::ABrickToTheHead::Artist, Matzushii's 2nd Phase Assets::https://x.com/ABrickToTheHead::0xFFC92D3C
+TOFU::TOFU::Artist, Album Cover Art::https://x.com/Tofuisstilltofu::0xFFFCD9D4
+OhSoVanilla::OhSoVa::Animator, Hyperfunk Nikku, Xigmund and Vortex Nikku, ENA and Clips' Animations::https://x.com/OhSoVanilla64::0xFFFDBF50
+Ebola::Ebola::Artist, Icons::https://ebolahorny.newgrounds.com/::0xFF252D5A
+Seni::Seni::Artist, ENA's Assets::https://x.com/Little_Geecko::0xFFFB5C72
+Fore::FORE::Artist, Monika and Yuri's Assets::https://x.com/Fore_8040::0xFFA44C70
+Slushy_Anime::slushy::3D Artist, Tomongus' 3D Assets::https://x.com/Slushy_Anime::0xFF95D8FF
+Raze::Raze::Jojo Nikku's Design Assistance::https://x.com/TheOGFazFilms::0xFFB01A20
+Yoisabo::Yoisabo::Artist, Nikku's DDLC Assets::https://x.com/abo_bora::0xFFF3DCFF
+Cape::Cape::Charter, Charted Fandomania, Nightland and Deathmatch::https://x.com/c4peletini::0xFF31335A
+PooterStapot::Pooter::Artist, Slime Cat's (Limus) Assets::https://x.com/Lillbirb::0xFF7B62FB
+JustDemianAgain::JustDemianAgain::Artist, Killer Queen's Jojo Event Renders::https://x.com/proicon999::0xFF6D2627
+10ju::10ju::Charter, Charted Armageddon, Deep Poems, EXPURGATED, Hyperfunk, Satellite Picnic, Smokebomb, Sugarcrush, Soda Disco Funk::https://x.com/10juxd::0xFF850D17
+Kitty::Kitty::Voice Actress, Nikku's VA::https://x.com/aphexkitten::0xFF96BAFF
+MongMongTwo::Mong::Artist, Hyperfunk Nikku Assets::https://x.com/spacedoggo_art::0xFF677298
+DozenRahyz::Dozen::Artist, Jukebox Assets, Smiling Friends' Assets, Owner of H024's GF Design::https://x.com/DRahyz::0xFFDA2A86
+
+H024 Special Thanks
+ChewMcBlue::ChewMcBlue::Creative Assistance::https://x.com/ChewMcBlue_lol::0xFFFB5FF6
+ash::Ash::Hotline 024's v1 Programmer::https://x.com/ash__i_guess_::0xFFDCD8FE
+Yellowbird::Yellow::Writing Assistance, Creative Assistance::https://x.com/Shadow_Mario_::0xFF412429
+Lomanbro::Lomanbro::Creator of almost all the custom chromatic scales used in the mod::https://youtube.com/@lomanbro4208?si=Y-k5qUWsatwIcIjL::0xFFFFFFFF
+FMS_Cat::fms::original creator of the vhs shader used thats been edited to work inside flixel.\nsidenote: if you somehow see this and dont want the shader being used\njust let us know and we'll remove it::https://x.com/FMS_Cat::0xFFFF7E2B

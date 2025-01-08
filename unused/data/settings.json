@@ -1,0 +1,51 @@
+[
+	{
+		"save": "h024ScoreCounter",
+		"name": "Hotline Score Counter",
+		"type": "bool",
+		"description": "If unchecked, the Hotline 024 Score Counter is disabled\n(This action may improve performance).",
+		"value": true
+	},
+	{
+		"save": "h024NikkuStyleMenu",
+		"name": "Nikku Style Menu",
+		"type": "bool",
+		"description": "If checked, the Hotline 024 additional menu is activated to select a different Nikku's style in the song.\n(Unoptimized)",
+		"value": true
+	},
+	{
+		"save": "h024NikkuSelect",
+		"name": "Set Nikku's Style:",
+		"type": "string",
+		"description": "Select a different Nikku's style (if the 'Nikku Select Menu' is unchecked)",
+		"value": "nikku",
+		"format": "%v",
+
+		"options": ["nikku", "nikku-24", "nikku-jojo", "nikku-classic"]
+	},
+	{
+		"save": "h024PauseMenu",
+		"name": "Hotline Pause Menu",
+		"type": "bool",
+		"description": "if unchecked, the Hotline 024 Pause Menu is disabled.",
+		"value": true
+	},
+	{
+		"save": "h024PauseMusic",
+		"name": "Set Pause Music:",
+		"type": "string",
+		"description": "Select the song 'Memories' from Hotline 024 (only in 'Hotline Pause Menu') or those in the Psych Client Preferences.",
+		"value": "Memories",
+		"format": "%v",
+
+		"options": ["Memories", "ClientPrefs"]
+	},
+	{
+		"save": "h024UIHotline",
+		"name": "New Hotline UI",
+		"type": "bool",
+		"description": "If unchecked, the new Hotline 024 UI is disabled.",
+		"value": false
+	}
+]
+

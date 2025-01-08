@@ -1,0 +1,25 @@
+{	
+	"boyfriend": {
+		"camera": {
+			"target_offset": 35,
+			"zoom": 0.75,
+			"pos_locked": []
+		}
+	},
+	
+	"opponent": {
+		"camera": {
+			"target_offset": 35,
+			"zoom": 0.65,
+			"pos_locked": []
+		}
+	},
+	
+	"girlfriend": {
+		"camera": {
+			"target_offset": 35,
+			"zoom": 0.8,
+			"pos_locked": []
+		}
+	}
+}

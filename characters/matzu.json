@@ -1,0 +1,80 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				2,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "matzushii idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-111,
+				28
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "matzushii right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				97,
+				-13
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "matzushii left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-22,
+				63
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "matzushii up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-29,
+				-163
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "matzushii down",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/matzu",
+	"position": [
+		50,
+		40
+	],
+	"healthicon": "astral",
+	"flip_x": false,
+	"healthbar_colors": [
+		0,
+		0,
+		0
+	],
+	"camera_position": [
+		-154,
+		85
+	],
+	"sing_duration": 6.1,
+	"scale": 1.2,
+	"_editor_isPlayer": false
+}

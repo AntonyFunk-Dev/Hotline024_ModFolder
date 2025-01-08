@@ -1,0 +1,31 @@
+{
+	"boyfriend": {
+		"order": 1,
+		"scrollFactor": 1.2,
+
+		"camera": {
+			"target_offset": 15,
+			"zoom": 0.88,
+			"pos_locked": [1100, 670]
+		}
+	},
+	
+	"opponent": {
+		"order": 0,
+		"scrollFactor": 1.5,
+
+		"camera": {
+			"target_offset": 30,
+			"zoom": 0.8,
+			"pos_locked": [980, 670]
+		}
+	},
+	
+	"girlfriend": {
+		"camera": {
+			"target_offset": 15,
+			"zoom": 0.9,
+			"pos_locked": [1030.95, 670]
+		}
+	}
+}

@@ -1,0 +1,223 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-12,
+				-7
+			],
+			"anim": "laxidle",
+			"fps": 24,
+			"name": "Nikku_IdleLax instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-5,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Nikku_Idle instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-47,
+				-30
+			],
+			"anim": "1shock",
+			"fps": 24,
+			"name": "Nikku_Shock instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				25,
+				0
+			],
+			"anim": "2shock",
+			"fps": 24,
+			"name": "Nikku_Shock2 instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				9,
+				14
+			],
+			"anim": "3shock",
+			"fps": 24,
+			"name": "Nikku_Shock3 instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				10,
+				5
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Nikku_LeftLax instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-7,
+				-30
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Nikku_DownLax instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-34,
+				24
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Nikku_UpLax instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-65,
+				-7
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Nikku_RightLax instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				8,
+				7
+			],
+			"anim": "singLEFT-alt",
+			"fps": 24,
+			"name": "Nikku_Left instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-8,
+				-28
+			],
+			"anim": "singDOWN-alt",
+			"fps": 24,
+			"name": "Nikku_Down instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-34,
+				31
+			],
+			"anim": "singUP-alt",
+			"fps": 24,
+			"name": "Nikku_Up instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-67,
+				-8
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 24,
+			"name": "Nikku_Right instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				4,
+				-6
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "Nikku_LeftMiss instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-18,
+				-27
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "Nikku_DownMiss instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-37,
+				41
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "Nikku_UpMiss instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-63,
+				-14
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "Nikku_RightMiss instance 1",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-57,
+				-43
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "sit",
+			"indices": [],
+			"name": "Nikku_Sit instance 1"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/NikkuSatPanicV1",
+	"position": [
+		-200,
+		220
+	],
+	"healthicon": "nikku",
+	"flip_x": true,
+	"healthbar_colors": [
+		204,
+		0,
+		83
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1.3,
+	"_editor_isPlayer": false
+}

@@ -5,9 +5,11 @@ import cutscenes.CutsceneHandler;
 var skipKey:String = 'SPACE';
 var skipSongPos:Float = 10.405;
 
-var objects:Array<Dynamic> = [];
 var cutscene:CutsceneHandler;
+
 var seenCutscene:Bool = false;
+
+var objects:Array<Dynamic> = [];
 
 var bla:FlxSprite;
 var bg:FlxSprite;
@@ -21,33 +23,43 @@ function onCreate() {
 	seenCutscene = PlayState.seenCutscene;
 
 	bg = new FlxSprite().loadGraphic(Paths.image(getVar('stageDir') + '/cutscene/bg'));
+	bg.antialiasing = ClientPrefs.data.antialiasing;
 	bg.scale.x = bg.scale.y = (FlxG.height / bg.height);
 	bg.screenCenter();
 
 	if (!seenCutscene) {
 		logo = new FlxSprite().loadGraphic(Paths.image(getVar('stageDir') + '/cutscene/logo'));
+		logo.antialiasing = ClientPrefs.data.antialiasing;
 		logo.screenCenter();
 
 		skpTxt = new FlxText(0, 0, FlxG.width, 'Press \'' + skipKey + '\' to skip the intro').setFormat(Paths.font('goodbyeDespair.ttf'), 
 		16, FlxColor.WHITE, 'center', null, FlxColor.BLACK);
+		skpTxt.antialiasing = ClientPrefs.data.antialiasing;
 		skpTxt.borderSize = 2;
 		skpTxt.alpha = 0;
 	}
 
-	col = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2);
-	col.color = FlxColor.BLACK;
+	col = new FlxSprite().makeGraphic(1, 1);
+	col.scale.set(FlxG.width, FlxG.height);
+	col.updateHitbox();
 	col.screenCenter();
+	col.color = FlxColor.BLACK;
 
-	bla = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+	bla = col.clone();
+	bla.scale.set(FlxG.width, FlxG.height);
+	bla.updateHitbox();
 	bla.screenCenter();
+	bla.color = FlxColor.BLACK;
 
 	txt = new FlxText(0, 0, FlxG.width, 'BEWARE OF THE MOON').setFormat(Paths.font('vcr.ttf'), 
 	80, FlxColor.WHITE, 'center');
+	txt.antialiasing = ClientPrefs.data.antialiasing;
 	txt.y = ((FlxG.height - txt.height) / 2) - 40;
 	txt.visible = false;
 
 	xtrTxt = new FlxText(0, 0, FlxG.width, 'it\'s watching you.').setFormat(Paths.font('vcr.ttf'), 
 	40, FlxColor.WHITE, 'center');
+	xtrTxt.antialiasing = ClientPrefs.data.antialiasing;
 	xtrTxt.y = ((FlxG.height - xtrTxt.height) / 2) + 40;
 	xtrTxt.visible = false;
 
@@ -144,7 +156,7 @@ function onPrepareCutscene() {
 }
 
 function onFinishTransition() {
-	col.color = FlxColor.WHITE;
+	if (ClientPrefs.data.flashing) col.color = FlxColor.WHITE;
 	col.visible = true;
 
 	bg.loadGraphic(Paths.image(getVar('stageDir') + '/cutscene/bgEnd'));
@@ -163,9 +175,7 @@ function onFinishTransition() {
 		game.camHUD.alpha = 1.0;
 
 		for (obj in objects) {
-			game.uiGroup.remove(obj);
 			obj.kill();
-			game.remove(obj);
 			obj.destroy();
 		}
 	});

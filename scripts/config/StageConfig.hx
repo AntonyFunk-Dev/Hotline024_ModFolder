@@ -20,6 +20,7 @@ var charConfig:Bool = false;
 var reflectConfig:Bool = false;
 
 setVar('stageData', stageData);
+setVar('updateCamera', true);
 
 for (obj in stage) {
 	if (stage.indexOf(obj) == null) continue;
@@ -32,6 +33,7 @@ for (obj in stage) {
 }
 
 if (charConfig) game.startHScriptsNamed('scripts/config/CharStageConfig.hx');
+if (reflectConfig && !ClientPrefs.data.lowQuality) game.startHScriptsNamed('scripts/config/ReflectStageConfig.hx');
 
 function onCreatePost() {
 	if (cam[2].pos_locked != null && cam[2].pos_locked.length > 0) {
@@ -46,28 +48,22 @@ function onUpdatePost() {
 	if (isCameraOnForcedPos || game.isDead) return;
 
 	if (game.gf != null && gfSection) {
-		if (cam[2].zoom != null) game.defaultCamZoom = cam[2].zoom;
-
 		if (game.gf.getAnimationName().indexOf('sing') == -1)
 		FlxG.camera.targetOffset.set(0, 0);
 
-		return setMoveCamera(2);
+		return if (getVar('updateCamera')) setMoveCamera(2);
 	}
 
 	if (!mustHitSection) {
-		if (cam[1].zoom != null) game.defaultCamZoom = cam[1].zoom;
-
 		if (game.dad.getAnimationName().indexOf('sing') == -1)
 		FlxG.camera.targetOffset.set(0, 0);
 
-		setMoveCamera(1);
+		if (getVar('updateCamera')) setMoveCamera(1);
 	} else {
-		if (cam[0].zoom != null) game.defaultCamZoom = cam[0].zoom;
-
 		if (game.boyfriend.getAnimationName().indexOf('sing') == -1)
 		FlxG.camera.targetOffset.set(0, 0);
 
-		setMoveCamera();
+		if (getVar('updateCamera')) setMoveCamera();
 	}
 
 	return;
@@ -96,6 +92,10 @@ function opponentNoteHit(note) {
 
 	return;
 }
+
+function onSongStart() setSectionZoom();
+
+function onSectionHit() setSectionZoom();
 
 function onEvent(name, value1, value2) {
 	if (name == 'Camera Follow Pos') {
@@ -134,4 +134,20 @@ function moveOffsetCamera(?charType:Int = 0, ?note:Note = null) {
 	: (note.noteData == 3 ? (cam[charType].target_offset != null ? cam[charType].target_offset : 0) : 0));
 	FlxG.camera.targetOffset.y = (note.noteData == 1 ? (cam[charType].target_offset != null ? cam[charType].target_offset : 0)
 	: (note.noteData == 2 ? -(cam[charType].target_offset != null ? cam[charType].target_offset : 0) : 0));
+}
+
+function setSectionZoom() {
+	if (isCameraOnForcedPos || game.isDead) return;
+
+	if (game.gf != null && gfSection) {
+		return if (cam[2].zoom != null) game.defaultCamZoom = cam[2].zoom;
+	}
+
+	if (!mustHitSection) {
+		if (cam[1].zoom != null) game.defaultCamZoom = cam[1].zoom;
+	} else {
+		if (cam[0].zoom != null) game.defaultCamZoom = cam[0].zoom;
+	}
+
+	return;
 }

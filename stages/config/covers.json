@@ -1,0 +1,43 @@
+{
+	"boyfriend": {
+		"camera": {
+			"target_offset": 35,
+			"zoom": 0.76,
+			"pos_locked": []
+		},
+	
+		"reflect": {
+			"alpha": 0.65,
+			"offsetY": 1780,
+			"blend": "add"
+		}
+	},
+	
+	"opponent": {
+		"camera": {
+			"target_offset": 35,
+			"zoom": 0.5,
+			"pos_locked": []
+		},
+	
+		"reflect": {
+			"alpha": 0.65,
+			"offsetY": 2230,
+			"blend": "add"
+		}
+	},
+	
+	"girlfriend": {
+		"camera": {
+			"target_offset": 35,
+			"zoom": 0.8,
+			"pos_locked": []
+		},
+
+		"reflect": {
+			"alpha": 0.65,
+			"offsetY": 1710,
+			"blend": "add"
+		}
+	}
+}

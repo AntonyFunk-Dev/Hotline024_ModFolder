@@ -1,0 +1,124 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "shipidle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-6,
+				-5
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "ShipRight",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				27,
+				-5
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "ShipLeft",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				22
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "ShipUp",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				1,
+				-16
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "ShipDown",
+			"indices": []
+		},
+		{
+			"offsets": [
+				33,
+				75
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "LeftMiss"
+		},
+		{
+			"offsets": [
+				13,
+				58
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "DownMiss"
+		},
+		{
+			"offsets": [
+				9,
+				100
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "UpMiss"
+		},
+		{
+			"offsets": [
+				-4,
+				72
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "RightMiss"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/Spaceship",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "idk",
+	"flip_x": true,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		-120,
+		-50
+	],
+	"sing_duration": 6.1,
+	"scale": 1.2,
+	"_editor_isPlayer": true
+}

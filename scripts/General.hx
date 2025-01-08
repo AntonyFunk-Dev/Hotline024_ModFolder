@@ -1,3 +1,4 @@
+import flixel.text.FlxText;
 import flixel.group.FlxTypedSpriteGroup;
 import options.OptionsState;
 import psychlua.LuaUtils;
@@ -11,6 +12,9 @@ var cutsceneGroup:FlxTypedSpriteGroup<Dynamic> = new FlxTypedSpriteGroup();
 var pauseMusic:String = ClientPrefs.data.pauseMusic;
 
 var charConfig:Bool = false;
+
+var songCreditBG:FlxSprite;
+var songCreditTxt:FlxText;
 
 game.introSoundsSuffix = '-h024';
 
@@ -36,8 +40,27 @@ game.startHScriptsNamed('scripts/config/ScoreCounter.hx');
 if (getModSetting('h024PauseMenu'))
 game.startHScriptsNamed('scripts/config/PauseSubstate.hx');
 
+if (getModSetting('h024GameOver'))
+game.startHScriptsNamed('scripts/config/GameOver.hx');
+
 if (getModSetting('h024PauseMusic') != 'ClientPrefs' && ClientPrefs.data.pauseMusic != 'None')
 ClientPrefs.data.pauseMusic = getModSetting('h024PauseMusic');
+
+if (PlayState.SONG.player2 == 'nikku') {
+	if (getModSetting('h024NikkuStyleMenu')) {
+		if (!PlayState.seenCutscene) {
+			game.startHScriptsNamed('scripts/config/NikkuStyleSubstate.hx');
+		} else {
+			if (FlxG.save.data.nikkuStyle != null && !PlayState.chartingMode) {
+				PlayState.SONG.player2 = FlxG.save.data.nikkuStyle;
+			}
+		}	
+	} else {
+		if (!PlayState.chartingMode) PlayState.SONG.player2 = Paths.formatToSongPath(getModSetting('h024NikkuStyle'));
+	}
+
+	Paths.clearUnusedMemory();
+}
 
 for (char in [PlayState.SONG.player1, PlayState.SONG.player2, PlayState.SONG.gfVersion]) {
 	if (Paths.fileExists('characters/config/' + char + '.json')) charConfig = true;
@@ -46,20 +69,6 @@ for (char in [PlayState.SONG.player1, PlayState.SONG.player2, PlayState.SONG.gfV
 if (charConfig) game.startHScriptsNamed('scripts/config/CharConfig.hx');
 
 function onCreate() {
-	var upperBar:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height, FlxColor.BLACK);
-	upperBar.cameras = [game.camHUD];
-	upperBar.scrollFactor.set();
-	upperBar.screenCenter(0x01);
-	insert(game.members.indexOf(LuaUtils.getLowestCharacterGroup()), upperBar);
-	upperBar.y -= upperBar.height - 70;
-
-	var lowerBar:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height, FlxColor.BLACK);
-	lowerBar.cameras = [game.camHUD];
-	lowerBar.scrollFactor.set();
-	lowerBar.screenCenter(0x01);
-	insert(game.members.indexOf(LuaUtils.getLowestCharacterGroup()), lowerBar);
-	lowerBar.y += lowerBar.height - 70;
-
 	game.setOnHScript('isJsonEmpty', isJsonEmpty);
 	game.setOnHScript('getScoreTxt', getScoreTxt);
 	game.setOnHScript('daRating', daRating);
@@ -68,6 +77,44 @@ function onCreate() {
 	game.setOnScripts('mustHitSection', PlayState.SONG.notes[curSection].mustHitSection);
 	game.setOnScripts('altAnim', PlayState.SONG.notes[curSection].altAnim);
 	game.setOnScripts('gfSection', PlayState.SONG.notes[curSection].gfSection);
+
+	var upperBar:FlxSprite = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
+	upperBar.cameras = [game.camHUD];
+	upperBar.scrollFactor.set();
+	upperBar.scale.set(FlxG.width * 1.5, FlxG.height / 1.5);
+	upperBar.updateHitbox();
+	upperBar.screenCenter(0x01);
+	insert(game.members.indexOf(LuaUtils.getLowestCharacterGroup()), upperBar);
+	upperBar.y -= upperBar.height - 70;
+
+	var lowerBar:FlxSprite = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
+	lowerBar.cameras = [game.camHUD];
+	lowerBar.scrollFactor.set();
+	lowerBar.scale.set(FlxG.width * 1.5, FlxG.height / 1.5);
+	lowerBar.updateHitbox();
+	lowerBar.screenCenter(0x01);
+	insert(game.members.indexOf(LuaUtils.getLowestCharacterGroup()), lowerBar);
+	lowerBar.y += lowerBar.height + 170;
+
+	songCreditBG = new FlxSprite(0, 200).loadGraphic(Paths.image('ui/songSlide/bartext'));
+	songCreditBG.antialiasing = ClientPrefs.data.antialiasing;
+	songCreditBG.cameras = [game.camOther];
+	songCreditBG.scrollFactor.set();
+	add(songCreditBG);
+	songCreditBG.alpha = 0.5;
+
+	songCreditTxt = new FlxText(0, 0, 0, PlayState.SONG.song);
+	songCreditTxt.setFormat(Paths.font('cocoSharp.ttf'), 40, FlxColor.WHITE, 'left');
+	songCreditTxt.antialiasing = ClientPrefs.data.antialiasing;
+	songCreditTxt.cameras = [game.camOther];
+	songCreditTxt.scrollFactor.set();
+	add(songCreditTxt);
+
+	songCreditBG.x -= songCreditBG.width;
+	songCreditTxt.x -= songCreditTxt.width;
+	songCreditBG.scale.y = songCreditBG.scale.y / (songCreditBG.height / songCreditTxt.height) + 0.25;
+
+	songCreditTxt.y = songCreditBG.y + (songCreditBG.height - songCreditTxt.height) / 2;
 
 	return;
 }
@@ -114,14 +161,30 @@ function goodNoteHit(note) return game.camZooming = true;
 
 function onCountdownTick(count) {
 	switch(count) {
+		case Countdown.THREE:
+			var startCredit:FlxTimer = new FlxTimer().start(Conductor.crochet / 1000, () -> {
+				FlxTween.tween(songCreditBG, {x: (-songCreditBG.width + songCreditTxt.width) + 75}, (Conductor.crochet / 1000) * 2, {
+					ease: FlxEase.quartOut,
+					onUpdate: () -> {songCreditTxt.x = songCreditBG.x + (songCreditBG.width - songCreditTxt.width) - 60;},
+					onComplete: () -> {
+						var finishCredit:FlxTimer = new FlxTimer().start((Conductor.crochet / 1000) * 8 + 0.5, () -> {
+							FlxTween.tween(songCreditBG, {x: -songCreditBG.width}, (Conductor.crochet / 1000) * 2, {
+								ease: FlxEase.quartIn,
+								onUpdate: () -> {songCreditTxt.x = songCreditBG.x + (songCreditBG.width - songCreditTxt.width) - 60;}
+							});
+						});
+					}
+				});
+			});
+
 		case Countdown.TWO:
-		game.countdownReady.cameras = [camCutscene];
+		game.countdownReady.cameras = [game.camOther];
 
 		case Countdown.ONE:
-		game.countdownSet.cameras = [camCutscene];
+		game.countdownSet.cameras = [game.camOther];
 
 		case Countdown.GO:
-		game.countdownGo.cameras = [camCutscene];
+		game.countdownGo.cameras = [game.camOther];
 	}
 
 	return;

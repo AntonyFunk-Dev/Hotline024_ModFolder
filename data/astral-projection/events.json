@@ -1,0 +1,26 @@
+{
+	"song": {
+		"events": [
+			[
+				112941.176470588,
+				[
+					[
+						"Astral Event",
+						"camGame",
+						""
+					],
+					[
+						"Astral Event",
+						"camHUD",
+						"1"
+					],
+					[
+						"Change Character",
+						"dad",
+						"matzufuckedupandtwisted"
+					]
+				]
+			]
+		]
+	}
+}

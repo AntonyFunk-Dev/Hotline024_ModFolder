@@ -24,3 +24,13 @@ Holds camera-specific settings for each character:
     zoom: Controls the camera zoom level, smaller values zoom out, larger values zoom in on the character.
 
     pos_locked: Locks the camera to specific coordinates. Set an empty array [] for a dynamic camera or use [x, y] values to fix its position.
+
+
+Reflect Settings:
+Defines the reflection parameters for each character:
+
+    alpha: Controls the transparency of the reflection.
+
+    offsetY: Adjusts the vertical position of the reflection.
+
+    blend: Sets the blend mode for the reflection effect. Use different Haxe blend modes such as "add", "multiply", "screen", or others listed specifically here: https://api.openfl.org/openfl/display/BlendMode.html

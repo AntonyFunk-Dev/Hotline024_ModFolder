@@ -1,0 +1,29 @@
+{
+	"songs": [
+		["Broadcasting", "nikku", [166, 20, 75]],
+		["Mirror Magic", "nikku", [166, 20, 75]],
+		["FANDOMANIA", "nikku", [166, 20, 75]],
+		["Killer Queen", "nikku", [166, 20, 75]],
+		["Hyperfunk", "nikku", [166, 20, 75]],
+		["Sugarcrush", "nikku", [166, 20, 75]],
+		["smokebomb", "nikku", [166, 20, 75]],
+		["Overdrive", "nikku", [166, 20, 75]],
+		["EXPURGATED", "nikku", [166, 20, 75]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+
+	"storyName": "Freeplay Songs",
+	"difficulties": "Normal",
+	"weekBackground": "",
+	"weekBefore": "",
+	"weekName": "",
+	"startUnlocked": true,
+
+	"hideStoryMode": true,
+	"hideFreeplay": false
+}

@@ -1,0 +1,53 @@
+{
+	"camera": {
+		
+		"boyfriend": {
+			"zoom": false,
+			"zoom_set": 1.0,
+			"follow": false,
+			"follow_set": 0,
+			"pos_force": false,
+			"pos_force_set": [
+				0,
+				0
+			],
+			"pos_offsets": [
+				0,
+				0
+			]
+		},
+		
+		"opponent": {
+			"zoom": false,
+			"zoom_set": 1.0,
+			"follow": false,
+			"follow_set": 0,
+			"pos_force": false,
+			"pos_force_set": [
+				0,
+				0
+			],
+			"pos_offsets": [
+				0,
+				0
+			]
+		},
+		
+		"girlfriend": {
+			"zoom": false,
+			"zoom_set": 1.0,
+			"follow": false,
+			"follow_set": 0,
+			"pos_force": false,
+			"pos_force_set": [
+				0,
+				0
+			],
+			"pos_offsets": [
+				0,
+				0
+			]
+		}
+	
+	}
+}

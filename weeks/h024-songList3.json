@@ -1,0 +1,29 @@
+{
+	"songs": [
+		["Extraterrestrial", "xigmund", [60, 155, 80]],
+		["Satellite Picnic", "boo", [60, 80, 215]],
+		["Sussy Pussy", "tomongus", [155, 53, 73]],
+		["Close Chuckle", "charlie", [100, 80, 60]],
+		["Deep Poems", "monika", [235, 93, 133]],
+		["Fun is Infinite", "mazin", [0, 40, 180]],
+		["Nightland", "nikku", [166, 20, 75]],
+		["Uncanny Valley", "ena", [235, 235, 160]],
+		["Astral Projection", "astral", [40, 40, 40]]
+	],
+
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+
+	"storyName": "Secret Songs",
+	"difficulties": "Normal",
+	"weekBackground": "",
+	"weekBefore": "",
+	"weekName": "",
+	"startUnlocked": true,
+
+	"hideStoryMode": true,
+	"hideFreeplay": false
+}

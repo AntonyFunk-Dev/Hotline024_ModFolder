@@ -1,0 +1,13 @@
+{
+	"song": {
+		"player1": "bf",
+		"player2": "nikku",
+		"notes": [],
+		"player3": "gf",
+		"song": "select-menu",
+		"stage": "",
+		"validScore": false,
+		"speed": 1,
+		"bpm": 90
+	}
+}
