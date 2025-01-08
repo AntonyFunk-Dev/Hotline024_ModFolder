@@ -1,0 +1,17 @@
+Type:
+Defines the movement style:
+    0 = Pingpong: Creates a continuous up-and-down motion. This movement can feel smooth or bouncy depending on the ease.
+    1 = Beat Movement: Moves with each beat of the music. The feel of this motion also depends on the ease setting.
+
+Speed:
+Controls how fast the movement is. Lower values make it snappier, higher values slow it down.
+
+Ease:
+Sets the motion’s smoothness style, like linear or ease In/Out. This affects how naturally the character moves and stops.
+
+Amount:
+Determines how much the character moves vertically. It can be a single value for consistent movement or a range (like [min, max, decimal]) to add variation. Leave it empty for no extra vertical movement.
+
+
+
+The json files inside this example folder show an example of how to use them (bf.json uses type 1 and nikku.json uses 0)

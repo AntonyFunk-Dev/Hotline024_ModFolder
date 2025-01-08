@@ -1,0 +1,26 @@
+order:
+Determines the rendering order of characters:
+    0 = First to render (opponent)
+    1 = Second to render (boyfriend)
+    2 = Third to render (girlfriend)
+    Setting a higher order value brings characters to the front.
+(Remember that 2 or more characters cannot have the same order)
+
+scale:
+Sets the character's size. 1 means default size, while values above or below adjust the scale up or down.
+(All offset animations are automatically adjusted)
+
+scrollFactor:
+Controls how fast characters move in the background compared to the camera.
+    1 = Moves at the camera's pace (foreground).
+    Lower values (like 0.5) make characters move more slowly, creating depth by simulating background distance.
+
+
+
+Camera Settings:
+Holds camera-specific settings for each character:
+    target_offset: Adjusts the camera's tracking offset, with higher values panning it away from center.
+
+    zoom: Controls the camera zoom level, smaller values zoom out, larger values zoom in on the character.
+
+    pos_locked: Locks the camera to specific coordinates. Set an empty array [] for a dynamic camera or use [x, y] values to fix its position.

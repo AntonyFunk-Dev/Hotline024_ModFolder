@@ -1,0 +1,6 @@
+{
+	"type": 1,
+	"speed": 0.5,
+	"ease": "quadOut",
+	"amount": 50
+}

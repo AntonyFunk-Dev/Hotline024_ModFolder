@@ -1,0 +1,10 @@
+{
+	"name": "Hotline 024 Port (Preview)",
+	"description": "Port by AntonyFunk for Psych Engine\n\n\nEnter the Mod Options for the desired configuration.",
+	"restart": true,
+	"color": [
+		166,
+		20,
+		75
+	]
+}
