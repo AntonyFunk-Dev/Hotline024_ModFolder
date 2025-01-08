@@ -4,7 +4,7 @@ import flixel.sound.FlxSound;
 import backend.BaseStage;
 import cutscenes.CutsceneHandler;
 
-var skipKey:String = 'SPACE';
+var skipKey:String = 'accept';
 var skip:Bool = false;
 
 var cutscene:CutsceneHandler;
@@ -24,6 +24,8 @@ function onCreate() {
 	seenCutscene = PlayState.seenCutscene;
 
 	if (!seenCutscene) {
+		game.inCutscene = true;
+		
 		cutsceneSound = new FlxSound().loadEmbedded(Paths.sound('panicPhone'));
 		FlxG.sound.list.add(cutsceneSound);
 
@@ -34,7 +36,7 @@ function onCreate() {
 		col.color = FlxColor.BLACK;
 		getVar('cutsceneGroup').add(col);
 
-		skpTxt = new FlxText(0, 5, FlxG.width, 'Press \'' + skipKey + '\' to skip the intro');
+		skpTxt = new FlxText(0, 5, FlxG.width, 'Press \'' + skipKey.toUpperCase() + '\' to skip the intro');
 		skpTxt.setFormat(Paths.font('goodbyeDespair.ttf'), 16, FlxColor.WHITE, 'center');
 		skpTxt.cameras = [game.camOther];
 		skpTxt.alpha = 0;
@@ -58,10 +60,21 @@ function onCreate() {
 	return;
 }
 
+function onCreatePost() {
+    var dadPos:Int = FlxG.state.members.indexOf(game.dadGroup);
+    var bfPos:Int = FlxG.state.members.indexOf(game.boyfriendGroup);
+    if (dadPos > bfPos) return;
+
+    FlxG.state.members[bfPos] = game.dadGroup;
+    FlxG.state.members[dadPos] = game.boyfriendGroup;
+
+	return;
+}
+
 function onUpdate() {
 	if (seenCutscene) return;
 
-	if (!skip && isCutscene && keyboardJustPressed(skipKey)) {
+	if (!skip && isCutscene && keyJustPressed(skipKey)) {
 		skip = true;
 
 		cutscene.endTime = 0;
@@ -154,14 +167,12 @@ function onFinishTransition() {
 	FlxTween.tween(bla, {alpha: 1}, 0.35, {
 		ease: FlxEase.quadInOut,
 		onComplete: () -> {
+			setVar('updateCamera', true);
+
 			for (obj in objects) {
 				obj.kill();
 				obj.destroy();
 			}
-
-			setVar('updateCamera', true);
-
-			game.startCountdown();
 
 			FlxTween.tween(bla, {alpha: 0}, 0.35, {
 				ease: FlxEase.quadInOut,
@@ -171,6 +182,10 @@ function onFinishTransition() {
 					bla.destroy();
 				}
 			});
+
+			game.inCutscene = false;
+
+			game.startCountdown();
 		}
 	});
 }

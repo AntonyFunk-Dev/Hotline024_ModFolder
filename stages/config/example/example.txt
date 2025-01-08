@@ -1,11 +1,3 @@
-order:
-Determines the rendering order of characters:
-    0 = First to render (opponent)
-    1 = Second to render (boyfriend)
-    2 = Third to render (girlfriend)
-    Setting a higher order value brings characters to the front.
-(Remember that 2 or more characters cannot have the same order)
-
 scale:
 Sets the character's size. 1 means default size, while values above or below adjust the scale up or down.
 (All offset animations are automatically adjusted)

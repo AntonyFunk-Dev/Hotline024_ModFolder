@@ -1,7 +1,5 @@
 {	
 	"boyfriend": {
-		"order": 1,
-
 		"camera": {
 			"target_offset": 20,
 			"zoom": 0.8,
@@ -10,8 +8,6 @@
 	},
 	
 	"opponent": {
-		"order": 0,
-
 		"camera": {
 			"target_offset": 20,
 			"zoom": 0.8,

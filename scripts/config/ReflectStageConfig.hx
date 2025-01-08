@@ -6,24 +6,18 @@ var refl:Array<Dynamic> = [
 	getVar('stageData').girlfriend.reflect
 ];
 
-var charRefl:Array<Character> = [null, null, null];
+var charReflStr:Array<String> = ['boyfriendReflect', 'dadReflect', 'gfReflect'];
+
+var charRefl:Array<Character> = [];
 
 function onCreatePost() {
-	if (!isJsonEmpty(refl[0])) initReflectConfig('boyfriendReflect', 0, game.boyfriend);
-
-	if (!isJsonEmpty(refl[1])) initReflectConfig('dadReflect', 1, game.dad);
-
-	if (!isJsonEmpty(refl[2]) && game.gf != null) initReflectConfig('gfReflect', 2, game.gf);
+	for (i in 0...3) if (!isJsonEmpty(refl[i]) && getChar(i) != null) initReflectConfig(charReflStr[i], i, getChar(i));
 
 	return;
 }
 
 function onUpdatePost() {
-	if (!isJsonEmpty(refl[0])) updateReflectConfig(0, game.boyfriend);
-
-	if (!isJsonEmpty(refl[1])) updateReflectConfig(1, game.dad);
-
-	if (!isJsonEmpty(refl[2]) && game.gf != null) updateReflectConfig(2, game.gf);
+	for (i in 0...3) if (!isJsonEmpty(refl[i]) && getChar(i) != null) updateReflectConfig(i, getChar(i));
 
 	return;
 }
@@ -32,11 +26,11 @@ function onEvent(name, value1, value2) {
 	if (name == 'Change Character') {
 		switch(value1.toLowerCase()) {
 			case 'gf' | 'girlfriend':
-				if (!isJsonEmpty(refl[2]) && game.gf != null) initReflectConfig('gfReflect', 2, game.gf);
+				if (!isJsonEmpty(refl[2]) && game.gf != null) initReflectConfig(charReflStr[2], 2, game.gf);
 			case 'dad' | 'opponent':
-				if (!isJsonEmpty(refl[1])) initReflectConfig('dadReflect', 1, game.dad);
+				if (!isJsonEmpty(refl[1]) && game.dad != null) initReflectConfig(charReflStr[1], 1, game.dad);
 			default:
-				if (!isJsonEmpty(refl[0])) initReflectConfig('boyfriendReflect', 0, game.boyfriend);
+				if (!isJsonEmpty(refl[0]) && game.boyfriend != null) initReflectConfig(charReflStr[0], 0, game.boyfriend);
 		}
 	}
 
@@ -60,9 +54,8 @@ function initReflectConfig(tag:String = '', ?charType:Int = 0, ?char:Character =
 	charRefl[charType].flipY = true;
 	charRefl[charType].flipX = char.flipX;
 	charRefl[charType].x = char.x;
-	charRefl[charType].alpha = (refl[charType].alpha != null ? refl[charType].alpha : 1.0);
-	if (ClientPrefs.data.shaders && (refl[charType].blend != null || refl[charType].blend != ''))
-	charRefl[charType].blend = LuaUtils.blendModeFromString(refl[charType].blend);
+	charRefl[charType].alpha = (refl[charType].alpha ?? 1.0);
+	if (ClientPrefs.data.shaders) charRefl[charType].blend = LuaUtils.blendModeFromString(refl[charType].blend ?? '');
 
 	switch(charType) {
 		case 2:
@@ -82,11 +75,11 @@ function updateReflectConfig(?charType:Int = 0, ?char:Character = null) {
 
 		switch(charType) {
 			case 2:
-				charRefl[charType].y = ((char.positionArray[1] + game.gfGroup.y) - char.y) + (refl[charType].offsetY != null ? refl[charType].offsetY : 0);
+				charRefl[charType].y = ((char.positionArray[1] + game.gfGroup.y) - char.y) + (refl[charType].offsetY ?? 0);
 			case 1:
-				charRefl[charType].y = ((char.positionArray[1] + game.dadGroup.y) - char.y) + (refl[charType].offsetY != null ? refl[charType].offsetY : 0);
+				charRefl[charType].y = ((char.positionArray[1] + game.dadGroup.y) - char.y) + (refl[charType].offsetY ?? 0);
 			default:
-				charRefl[charType].y = ((char.positionArray[1] + game.boyfriendGroup.y) - char.y) + (refl[charType].offsetY != null ? refl[charType].offsetY : 0);
+				charRefl[charType].y = ((char.positionArray[1] + game.boyfriendGroup.y) - char.y) + (refl[charType].offsetY ?? 0);
 		}
 
 		charRefl[charType].offset.x = char.offset.x;

@@ -1,8 +1,8 @@
 import flixel.text.FlxText;
 import flixel.group.FlxTypedSpriteGroup;
 import options.OptionsState;
-import psychlua.LuaUtils;
 import backend.CoolUtil;
+import backend.Mods;
 
 var camCutscene:FlxCamera = new FlxCamera();
 camCutscene.bgColor = 0x00;
@@ -29,25 +29,27 @@ setVar('ratingStr', '');
 setVar('stageDir', 'stages/' + PlayState.curStage);
 setVar('stageConfigJson', 'stages/config/' + PlayState.curStage + '.json');
 
+setVar('currentModDirectory', Mods.currentModDirectory);
+
 setVar('FlxTextBorderStyle', Type.resolveEnum('flixel.text.FlxTextBorderStyle'));
 
 if (Paths.fileExists(getVar('stageConfigJson')))
 game.startHScriptsNamed('scripts/config/StageConfig.hx');
 
-if (getModSetting('h024ScoreCounter'))
+if (getModSetting('h024ScoreCounter', getVar('currentModDirectory')))
 game.startHScriptsNamed('scripts/config/ScoreCounter.hx');
 
-if (getModSetting('h024PauseMenu'))
+if (getModSetting('h024PauseMenu', getVar('currentModDirectory')))
 game.startHScriptsNamed('scripts/config/PauseSubstate.hx');
 
-if (getModSetting('h024GameOver'))
+if (getModSetting('h024GameOver', getVar('currentModDirectory')))
 game.startHScriptsNamed('scripts/config/GameOver.hx');
 
-if (getModSetting('h024PauseMusic') != 'ClientPrefs' && ClientPrefs.data.pauseMusic != 'None')
-ClientPrefs.data.pauseMusic = getModSetting('h024PauseMusic');
+if (getModSetting('h024PauseMusic', getVar('currentModDirectory')) != 'ClientPrefs' && ClientPrefs.data.pauseMusic != 'None')
+ClientPrefs.data.pauseMusic = getModSetting('h024PauseMusic', getVar('currentModDirectory'));
 
 if (PlayState.SONG.player2 == 'nikku') {
-	if (getModSetting('h024NikkuStyleMenu')) {
+	if (getModSetting('h024NikkuStyleMenu', getVar('currentModDirectory'))) {
 		if (!PlayState.seenCutscene) {
 			game.startHScriptsNamed('scripts/config/NikkuStyleSubstate.hx');
 		} else {
@@ -56,7 +58,7 @@ if (PlayState.SONG.player2 == 'nikku') {
 			}
 		}	
 	} else {
-		if (!PlayState.chartingMode) PlayState.SONG.player2 = Paths.formatToSongPath(getModSetting('h024NikkuStyle'));
+		if (!PlayState.chartingMode) PlayState.SONG.player2 = Paths.formatToSongPath(getModSetting('h024NikkuStyle', getVar('currentModDirectory')));
 	}
 
 	Paths.clearUnusedMemory();
@@ -69,9 +71,10 @@ for (char in [PlayState.SONG.player1, PlayState.SONG.player2, PlayState.SONG.gfV
 if (charConfig) game.startHScriptsNamed('scripts/config/CharConfig.hx');
 
 function onCreate() {
-	game.setOnHScript('isJsonEmpty', isJsonEmpty);
 	game.setOnHScript('getScoreTxt', getScoreTxt);
 	game.setOnHScript('daRating', daRating);
+	game.setOnHScript('getChar', getChar);
+	game.setOnHScript('isJsonEmpty', isJsonEmpty);
 	game.setOnHScript('triggerSelectSound', triggerSelectSound);
 
 	game.setOnScripts('mustHitSection', PlayState.SONG.notes[curSection].mustHitSection);
@@ -84,7 +87,7 @@ function onCreate() {
 	upperBar.scale.set(FlxG.width * 1.5, FlxG.height / 1.5);
 	upperBar.updateHitbox();
 	upperBar.screenCenter(0x01);
-	insert(game.members.indexOf(LuaUtils.getLowestCharacterGroup()), upperBar);
+	add(upperBar);
 	upperBar.y -= upperBar.height - 70;
 
 	var lowerBar:FlxSprite = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
@@ -93,7 +96,7 @@ function onCreate() {
 	lowerBar.scale.set(FlxG.width * 1.5, FlxG.height / 1.5);
 	lowerBar.updateHitbox();
 	lowerBar.screenCenter(0x01);
-	insert(game.members.indexOf(LuaUtils.getLowestCharacterGroup()), lowerBar);
+	add(lowerBar);
 	lowerBar.y += lowerBar.height + 170;
 
 	songCreditBG = new FlxSprite(0, 200).loadGraphic(Paths.image('ui/songSlide/bartext'));
@@ -191,8 +194,12 @@ function onCountdownTick(count) {
 }
 
 function onPause() {
-	FlxTween.globalManager.forEach(function(twn:FlxTween) twn.active = false);
-	FlxTimer.globalManager.forEach(function(tmr:FlxTimer) tmr.active = false);
+	if (game.inCutscene && !getModSetting('h024PauseMenu', getVar('currentModDirectory'))) return Function_Stop;
+
+	if (!game.inCutscene) {
+		FlxTween.globalManager.forEach(function(twn:FlxTween) twn.active = false);
+		FlxTimer.globalManager.forEach(function(tmr:FlxTimer) tmr.active = false);
+	}
 
 	return;
 }
@@ -207,7 +214,7 @@ function onResume() {
 function onDestroy() {
 	if (ClientPrefs.data.pauseMusic == 'None' && OptionsState.onPlayState) FlxG.sound.music.stop(); // fix lmao
 	
-	if (getModSetting('h024PauseMusic') != 'ClientPrefs') ClientPrefs.data.pauseMusic = pauseMusic;
+	if (getModSetting('h024PauseMusic', getVar('currentModDirectory')) != 'ClientPrefs') ClientPrefs.data.pauseMusic = pauseMusic;
 
 	return;
 }
@@ -222,6 +229,14 @@ function daRating(name:String) {
 	for (rating in game.ratingsData)
 	if (rating.name == name)
 	return rating;
+}
+
+function getChar(?index:Int = 0) {
+    switch (index) {
+		case 2: return game.gf;
+        case 1: return game.dad;
+        default: return game.boyfriend;
+    };
 }
 
 function triggerSelectSound(?isCancelled:Bool = false, ?volume:Float = 1.0, ?name:String = '') {

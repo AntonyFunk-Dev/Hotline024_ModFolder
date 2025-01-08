@@ -2,7 +2,7 @@ import flixel.effects.FlxFlicker;
 import flixel.text.FlxText;
 import cutscenes.CutsceneHandler;
 
-var skipKey:String = 'SPACE';
+var skipKey:String = 'accept';
 var skipSongPos:Float = 10.405;
 
 var cutscene:CutsceneHandler;
@@ -32,7 +32,7 @@ function onCreate() {
 		logo.antialiasing = ClientPrefs.data.antialiasing;
 		logo.screenCenter();
 
-		skpTxt = new FlxText(0, 0, FlxG.width, 'Press \'' + skipKey + '\' to skip the intro').setFormat(Paths.font('goodbyeDespair.ttf'), 
+		skpTxt = new FlxText(0, 0, FlxG.width, 'Press \'' + skipKey.toUpperCase() + '\' to skip the intro').setFormat(Paths.font('goodbyeDespair.ttf'), 
 		16, FlxColor.WHITE, 'center', null, FlxColor.BLACK);
 		skpTxt.antialiasing = ClientPrefs.data.antialiasing;
 		skpTxt.borderSize = 2;
@@ -91,7 +91,7 @@ function onUpdate() {
 	if (game.isDead || game.startingSong || game.endingSong) return;
 
 	if (FlxG.sound.music != null && Conductor.songPosition < curTime) {
-		if (seenCutscene || keyboardJustPressed(skipKey)) {
+		if (seenCutscene || keyJustPressed(skipKey)) {
 			if (!seenCutscene) cutscene.endTime = 0;
 
 			game.clearNotesBefore(curTime);
@@ -103,6 +103,8 @@ function onUpdate() {
 }
 
 function onSongStart() {
+	if (!seenCutscene) game.inCutscene = true;
+
 	game.camGame.alpha = 0;
 
 	if (!seenCutscene) onPrepareCutscene();
@@ -178,5 +180,7 @@ function onFinishTransition() {
 			obj.kill();
 			obj.destroy();
 		}
+
+		if (!seenCutscene) game.inCutscene = false;
 	});
 }

@@ -140,7 +140,7 @@ function comboNote(note:Note, ?noteMissed:Bool = false) {
 
 	comboTimer.reset(((Conductor.crochet / 1000) * 4));
 	comboGlow.alpha = (ClientPrefs.data.middleScroll ? 0.15 : 0.25);
-	comboHitTxt.alpha = scoreAmountHitTxt.alpha = scoreHitTxt.alpha = (ClientPrefs.data.middleScroll ? 0.7 : 1.0);
+	comboHitTxt.alpha = scoreAmountHitTxt.alpha = scoreHitTxt.alpha = (ClientPrefs.data.middleScroll ? 0.85 : 1.0);
 
 	scoreHitTxt.text = '' + scoreHitData.get((!game.cpuControlled && !game.practiceMode ? 'count' : 'scoreCPU'));
 

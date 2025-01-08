@@ -1,5 +1,6 @@
 import tjson.TJSON as Json;
 import flixel.util.FlxGradient;
+import backend.Mods;
 
 var dir:String = 'menus/skins/';
 
@@ -23,7 +24,7 @@ var menuSkins:Array<Dynamic> = [
 
 var twnsArray:Array<FlxTween> = [];
 
-var curSelected:Int = charType.indexOf(Paths.formatToSongPath(getModSetting('h024NikkuStyle')));
+var curSelected:Int = charType.indexOf(Paths.formatToSongPath(getModSetting('h024NikkuStyle', getVar('currentModDirectory'))));
 var isClicked:Bool = false;
 var isSubstate:Bool = true;
 

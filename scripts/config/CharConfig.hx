@@ -2,9 +2,9 @@ import tjson.TJSON as Json;
 import psychlua.LuaUtils;
 
 var charArray:Array<Dynamic> = [
-	{dir: '', posY: 0}, 
-	{dir: '', posY: 0}, 
-	{dir: '', posY: 0}
+    {dir: '', posY: 0}, 
+    {dir: '', posY: 0}, 
+    {dir: '', posY: 0}
 ];
 
 var charJson:Array<Dynamic> = [null, null, null];
@@ -12,111 +12,74 @@ var charJson:Array<Dynamic> = [null, null, null];
 var tweens:Array<FlxTween> = [];
 
 function onCreatePost() {
-	for (i in 0...3) tweens.push(var twn:FlxTween = null);
+    for (i in 0...3) {
+        tweens.push(null);
 
-	initCharConfig(0, game.boyfriend);
-
-	initCharConfig(1, game.dad);
-
-	if (game.gf != null) initCharConfig(2, game.gf);
-
-	return;
+        if (getChar(i) != null) initCharConfig(i, getChar(i));
+    }
+    
+    return;
 }
 
 function onBeatHit() {
-	if (ClientPrefs.data.lowQuality) return;
+    for (i in 0...3) {
+        if (getChar(i) == null || getTypeChar(i) != 1) continue;
 
-	if (getTypeChar(0) == 1) {
-		if (tweens[0] != null && tweens[0].active) tweens[0].cancel();
+        if (tweens[i] != null && tweens[i].active) tweens[i].cancel();
 
-		if (charJson[0].amount.length > 0)
-		game.boyfriend.y = charArray[0].posY + (charJson[0].amount != null ? FlxG.random.float(charJson[0].amount[0], charJson[0].amount[1], charJson[0].amount[2]) : 0);
-		else
-		game.boyfriend.y = charArray[0].posY + (charJson[0].amount != null ? charJson[0].amount : 0);
-		
-		tweens[0] = FlxTween.tween(game.boyfriend, {y: charArray[0].posY}, 
-			(charJson[0].speed != null ? charJson[0].speed : 1.0), {
-				ease: LuaUtils.getTweenEaseByString(charJson[0].ease)
-			}
-		);
-	}
-	
-	if (getTypeChar(1) == 1) {
-		if (tweens[1] != null && tweens[1].active) tweens[1].cancel();
+        if (charJson[i].amount != null && charJson[i].amount.length > 0) {
+            getChar(i).y = charArray[i].posY + FlxG.random.float(charJson[i].amount[0] ?? 0, charJson[i].amount[1] ?? 0, charJson[i].amount[2] ?? 0);
+        } else {
+            getChar(i).y = charArray[i].posY + (charJson[i].amount ?? 0);
+        }
 
-		if (charJson[1].amount.length > 0)
-		game.dad.y = charArray[1].posY + (charJson[1].amount != null ? FlxG.random.float(charJson[1].amount[0], charJson[1].amount[1], charJson[1].amount[2]) : 0);
-		else
-		game.dad.y = charArray[1].posY + (charJson[1].amount != null ? charJson[1].amount : 0);
+        tweens[i] = FlxTween.tween(getChar(i), {y: charArray[i].posY}, charJson[i].speed ?? 1.0, {
+            ease: LuaUtils.getTweenEaseByString(charJson[i].ease ?? "linear")
+        });
+    }
 
-		tweens[1] = FlxTween.tween(game.dad, {y: charArray[1].posY}, 
-			(charJson[1].speed != null ? charJson[1].speed : 1.0), {
-				ease: LuaUtils.getTweenEaseByString(charJson[1].ease)
-			}
-		);
-	}
-	
-	if (getTypeChar(2) == 1 && game.gf != null) {
-		if (tweens[2] != null && tweens[2].active) tweens[2].cancel();
-
-		if (charJson[2].amount.length > 0)
-		game.gf.y = charArray[2].posY + (charJson[2].amount != null ? FlxG.random.float(charJson[2].amount[0], charJson[2].amount[1], charJson[2].amount[2]) : 0);
-		else
-		game.gf.y = charArray[2].posY + (charJson[2].amount != null ? charJson[2].amount : 0);
-
-		tweens[2] = FlxTween.tween(game.gf, {y: charArray[2].posY}, 
-			(charJson[2].speed != null ? charJson[2].speed : 1.0), {
-				ease: LuaUtils.getTweenEaseByString(charJson[2].ease)
-			}
-		);
-	}
-
-	return;
+    return;
 }
 
 function onEvent(name, value1, value2) {
-	if (name == 'Change Character') {
-		switch(value1.toLowerCase()) {
-			case 'gf' | 'girlfriend':
-				if (game.gf != null) initCharConfig(2, game.gf);
-			case 'dad' | 'opponent':
-				initCharConfig(1, game.dad);
-			default:
-				initCharConfig(0, game.boyfriend);
-		}
-	}
+    if (name == 'Change Character') {
+        switch (value1.toLowerCase()) {
+            case 'gf', 'girlfriend':
+                if (game.gf != null) initCharConfig(2, game.gf);
+            case 'dad', 'opponent':
+                if (game.dad != null) initCharConfig(1, game.dad);
+            default:
+                if (game.boyfriend != null) initCharConfig(0, game.boyfriend);
+        }
+    }
 
-	return;
+    return;
 }
 
 function initCharConfig(?charType:Int = 0, ?char:Character = null) {
-	charArray[charType].dir = 'characters/config/' + char.curCharacter + '.json';
-	charArray[charType].posY = char.y;
+    charArray[charType].dir = 'characters/config/' + char.curCharacter + '.json';
+    charArray[charType].posY = char.y;
 
-	if (!Paths.fileExists(charArray[charType].dir)) {
-		if (tweens[charType] != null && tweens[charType].active) {
-			tweens[charType].cancel();
-			tweens[charType] = null;
-		}
-		return;
-	}
+    if (!Paths.fileExists(charArray[charType].dir)) {
+        if (tweens[charType] != null && tweens[charType].active) {
+            tweens[charType].cancel();
+            tweens[charType] = null;
+        }
+        return;
+    }
 
-	charJson[charType] = Json.parse(File.getContent(Paths.modFolders(charArray[charType].dir)));
+    charJson[charType] = Json.parse(File.getContent(Paths.modFolders(charArray[charType].dir)));
 
-	if (charJson[charType] != null && charJson[charType].type != 1) {
-		if (tweens[charType] != null && tweens[charType].active) tweens[charType].cancel();
-		tweens[charType] = FlxTween.tween(char, {y: (charArray[charType].posY + (charJson[charType].amount != null ? charJson[charType].amount : 0))}, 
-			(charJson[charType].speed != null ? charJson[charType].speed : 1.0) * FlxG.random.float(0.85, 1.2), {
-				ease: LuaUtils.getTweenEaseByString(charJson[charType].ease),
-				type: LuaUtils.getTweenTypeByString('pingpong')
-			}
-		);
-	}
+    if (charJson[charType] != null && charJson[charType].type != 1) {
+        if (tweens[charType] != null && tweens[charType].active) tweens[charType].cancel();
+        tweens[charType] = FlxTween.tween(char, {y: charArray[charType].posY + (charJson[charType].amount ?? 0)}, 
+        (charJson[charType].speed ?? 1.0) * FlxG.random.float(0.85, 1.2), {
+            ease: LuaUtils.getTweenEaseByString(charJson[charType].ease ?? "linear"),
+            type: LuaUtils.getTweenTypeByString('pingpong')
+        });
+    }
 }
 
-function getTypeChar(?charType:Int = 0) {
-	if (charJson[charType] != null && charJson[charType].type != null)
-	return charJson[charType].type;
-
-	return null; 
+function getTypeChar(charType:Int) {
+	return charJson[charType]?.type;
 }

@@ -10,7 +10,8 @@ import psychlua.FunkinLua;
 
 var dir:String = 'menus/pause/';
 
-var optionsKey:String = 'C';
+var optionsKeyboard:String = 'CONTROL';
+var optionsController:String = 'X';
 
 var menuItems:Array<String> = [];
 var menuItemsOG:Array<String> = ['resume', 'restart', 'botplay', 'practice', 'exit'];
@@ -30,6 +31,8 @@ var pauseMusic:FlxSound = new FlxSound();
 var songName:String = null;
 
 function onPause() {
+	if (game.inCutscene) return Function_Stop;
+	
 	if (!game.cpuControlled) {
 		for (note in game.playerStrums)
 			if(note.animation.curAnim != null && note.animation.curAnim.name != 'static') {
@@ -38,11 +41,12 @@ function onPause() {
 		}
 	}
 
-    CustomSubstate.openCustomSubstate('PauseSubState', true);
+	CustomSubstate.openCustomSubstate('PauseSubState', true);
 
 	return Function_Stop;
 }
 
+var optionTxt:FlxText;
 function onCustomSubstateCreate(name) {
     if (name == 'PauseSubState') {
 		curSelected = 0;
@@ -185,7 +189,7 @@ function onCustomSubstateCreate(name) {
 			CustomSubstate.instance.add(chartingText);
 		}
 
-		var optionTxt:FlxText = new FlxText(20, FlxG.height, 0, 'Press \'' + optionsKey + '\' to access the Options Menu', 32);
+		optionTxt = new FlxText(20, FlxG.height, 0, '', 32);
 		optionTxt.setFormat(Paths.font('goodbyeDespair.ttf'), 25);
 		optionTxt.setBorderStyle(getVar('FlxTextBorderStyle').OUTLINE, FlxColor.BLACK, 1.2);
 		optionTxt.antialiasing = ClientPrefs.data.antialiasing;
@@ -222,6 +226,8 @@ function onCustomSubstateUpdate(name, elapsed) {
 		cantUnpause -= elapsed;
 
 		if (pauseMusic.volume < 0.5) pauseMusic.volume += 0.01 * elapsed;
+
+		optionTxt.text = 'Press \'' + (controls.controllerMode ? optionsController : optionsKeyboard).toUpperCase() + '\' to access the Options Menu';
 	}
 
 	return;
@@ -309,7 +315,7 @@ function onCustomSubstateUpdatePost(name, elapsed) {
 			}
 		}
 
-		if (keyboardJustPressed(optionsKey)) {
+		if (keyboardJustPressed(optionsKeyboard) || anyGamepadJustPressed(optionsController)) {
 			PlayState.instance.paused = true; // For lua
 			PlayState.instance.vocals.volume = 0;
 
